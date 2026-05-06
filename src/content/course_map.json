@@ -1,0 +1,37 @@
+{
+    "curriculum": [
+        {
+            "unit_id": "u1",
+            "title": "HTML and CSS",
+            "description": "Learn the fundamental structure and styling of web pages using HTML and CSS.",
+            "lessons": [
+                {
+                    "lesson_id": "u1_l1",
+                    "title": "Document Structure",
+                    "type": "theory",
+                    "status": "completed"
+                },
+                {
+                    "lesson_id": "u1_e1",
+                    "title": "Hello World in Blue Boxes",
+                    "type": "exercise",
+                    "status": "locked",
+                    "exercise_ref": "u1_e1"
+                }
+            ]
+        },
+        {
+            "unit_id": "u2",
+            "title": "CSS Styling",
+            "description": "Learn how to style web pages.",
+            "lessons": [
+                {
+                    "lesson_id": "u2_l1",
+                    "title": "CSS Fundamentals",
+                    "type": "theory",
+                    "status": "locked"
+                }
+            ]
+        }
+    ]
+}

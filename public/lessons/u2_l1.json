@@ -1,0 +1,21 @@
+{
+  "lesson_id": "u2_l1",
+  "unit_title": "Unit 2: CSS Styling",
+  "title": "CSS Fundamentals",
+  "content": "Cascading Style Sheets (CSS) is the language used to style an HTML document. CSS describes how HTML elements should be displayed. In this lesson, we will cover the basics of selectors, properties, and values, enabling you to bring color, layout, and typography to your web pages.",
+  "code_block": {
+    "title": "Basic CSS Ruleset",
+    "language": "css",
+    "code": "body {\n  background-color: #0B1326;\n  color: #E2E8F0;\n  font-family: 'Inter', sans-serif;\n}\n\nh1 {\n  color: #22D3EE;\n  text-align: center;\n}"
+  },
+  "knowledge_check": {
+    "question": "Which part of a CSS rule targets the HTML element you want to style?",
+    "options": [
+      "The Property",
+      "The Selector",
+      "The Value",
+      "The Declaration"
+    ],
+    "correct_answer_index": 1
+  }
+}

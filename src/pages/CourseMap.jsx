@@ -1,0 +1,48 @@
+import { useEffect, useState } from 'react';
+import courseMapData from '../content/course_map.json';
+import CourseTimeline from '../components/CourseTimeline';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+
+export default function CourseMap() {
+  const [curriculum, setCurriculum] = useState([]);
+
+  useEffect(() => {
+    // In a real app this might be an async fetch from an API
+    setCurriculum(courseMapData.curriculum);
+  }, []);
+
+  return (
+    <div className="min-h-screen bg-[#0B1326] text-white font-inter flex flex-col overflow-x-hidden selection:bg-[#22D3EE]/30">
+      <Header />
+      
+      <main className="flex-1 pb-24 relative">
+        {/* Abstract background glows */}
+        <div className="absolute top-0 right-0 w-96 h-96 bg-[#22D3EE]/5 rounded-full blur-[120px] pointer-events-none" />
+        
+        {/* Header section */}
+        <section className="pt-16 pb-12 px-4 text-center relative z-10">
+          <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4 font-serif">
+            Course Map
+          </h1>
+          <p className="text-slate-400 text-base sm:text-lg max-w-lg mx-auto font-light leading-relaxed">
+            Your journey through the fundamentals of web development. Follow the path to build your core skills.
+          </p>
+        </section>
+
+        {/* Presentational Timeline */}
+        <section className="px-4 relative z-10">
+          {curriculum.length > 0 ? (
+            <CourseTimeline curriculum={curriculum} />
+          ) : (
+            <div className="flex justify-center py-32">
+              <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#22D3EE] shadow-[0_0_15px_rgba(34,211,238,0.5)]"></div>
+            </div>
+          )}
+        </section>
+      </main>
+
+      <Footer />
+    </div>
+  );
+}

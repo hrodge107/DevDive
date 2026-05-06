@@ -1,0 +1,33 @@
+{
+  "id": "hello-world-blue-boxes",
+  "title": "'Hello, World' in Blue Boxes",
+  "description": "In this exercise, you'll learn how to target HTML elements using CSS to give them basic layout properties and color.",
+  "category": "HTML / CSS",
+  "goal": "We have three <div> elements with the class .box. Your task is to make them look like distinct, blue rectangular cards.",
+  "instructions": [
+    "Open index.html and add a <strong>&lt;link&gt;</strong> tag to link styles.css in the &lt;head&gt; section.",
+    "Use an external stylesheet for design",
+    "Set <strong>background-color</strong> to <strong>cyan</strong>."
+  ],
+  "captureScreens": [
+    "desktop"
+  ],
+  "aiRubric": {
+    "codeRequirements": [
+      "The .box CSS class selector is properly defined",
+      "The background-color property is set to cyan or similar blue color"
+    ],
+    "visualRequirements": [
+      "All three boxes are visible and rendered on the page",
+      "All boxes have a cyan/blue background color",
+      "Each box are centered on the contnent"
+    ]
+  },
+  "initialFiles": [
+    {
+      "name": "index.html",
+      "language": "html",
+      "content": "<!DOCTYPE html>\n<html>\n  <head>\n    <!-- Link your stylesheet here -->\n  </head>\n  <body>\n    <div class=\"box\">Box 1</div>\n    <div class=\"box\">Box 2</div>\n    <div class=\"box\">Box 3</div>\n  </body>\n</html>"
+    }
+  ]
+}

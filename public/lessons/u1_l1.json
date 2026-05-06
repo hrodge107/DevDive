@@ -1,0 +1,21 @@
+{
+  "lesson_id": "u1_l1",
+  "unit_title": "Unit 1: HTML Foundations",
+  "title": "Understanding Document Structure",
+  "content": "Every robust architectural marvel begins with a solid foundation. In the realm of web development, this foundation is the HTML document structure. It provides the essential scaffolding upon which all content, styling, and interactivity are built. Understanding the specific roles of the boilerplate tags—the declaration of intent, the metadata housing, and the visible canvas—is paramount to crafting resilient and semantic web environments.",
+  "code_block": {
+    "title": "The Semantic Scaffolding",
+    "language": "html",
+    "code": "<!DOCTYPE html>    // <-- The blueprint declaration\n<html lang=\"en\">  // <-- The master container\n  <head>    // <-- The invisible metadata registry\n    <meta charset=\"UTF-8\">\n    <title>Structural Integrity</title>\n  </head>\n  <body>    // <-- The visible canvas\n    <h1>This is the header, a bigger text</h1>\n    <p>This is a paragraph</p>\n  </body>\n</html>"
+  },
+  "knowledge_check": {
+    "question": "Which core tag is exclusively responsible for containing all visible content rendered by the browser?",
+    "options": [
+      "<html>",
+      "<head>",
+      "<body>",
+      "<main>"
+    ],
+    "correct_answer_index": 2
+  }
+}

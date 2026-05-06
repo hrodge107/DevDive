@@ -1,0 +1,21 @@
+@import "tailwindcss";
+@config "../tailwind.config.js";
+
+/* Scrollbar styles to match the devdive color theme */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #09090b; /* matches figma-09090B / dark bg */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #475569; /* matches figma-475569 / gray-600 */
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #64748b; /* matches figma-64748B / gray-500 */
+}
