@@ -7,7 +7,7 @@ import { CodeEditor } from './CodeEditor';
 import { ResultsSidebar } from './ResultsSidebar';
 import { AddFileModal } from './AddFileModal';
 import { DeleteFileModal } from './DeleteFileModal';
-import { buildPreviewHtml, injectCSS } from '../../utils/htmlUtils';
+import { buildPreviewHtml, injectCSS } from '../../../utils/htmlUtils';
 
 export function ExerciseContainer() {
   const { exerciseId } = useParams();

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import Header from '../components/Header';
-import courseMapData from '../content/course_map.json';
+import Header from '../../../core/components/Header';
+import courseMapData from '../../../data/course_map.json';
 
 // Flatten all lessons across all units into a single ordered sequence
 const allLessons = courseMapData.curriculum.flatMap(unit => unit.lessons);

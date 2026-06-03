@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import courseMapData from '../content/course_map.json';
+import courseMapData from '../../../data/course_map.json';
 import CourseTimeline from '../components/CourseTimeline';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+import Header from '../../../core/components/Header';
+import Footer from '../../../core/components/Footer';
 
 export default function CourseMap() {
   const [curriculum, setCurriculum] = useState([]);

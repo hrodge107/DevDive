@@ -11,11 +11,10 @@ export default function Header() {
           DevDive
         </Link>
         <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
-          <Link 
-            to="/course-map" 
-            className={`hover:text-white transition-colors relative ${
-              currentPath === '/course-map' ? 'text-white' : ''
-            }`}
+          <Link
+            to="/course-map"
+            className={`hover:text-white transition-colors relative ${currentPath === '/course-map' ? 'text-white' : ''
+              }`}
           >
             Curriculum
             {currentPath === '/course-map' && (
@@ -25,20 +24,18 @@ export default function Header() {
           <Link to="/about" className="hover:text-white transition-colors">
             About
           </Link>
-          <Link to="/community" className="hover:text-white transition-colors">
-            Community
-          </Link>
         </nav>
       </div>
 
       <div className="flex items-center gap-6">
-        <button className="text-slate-400 hover:text-white transition-colors">
+        {/* Moon Button, Commented Out for Now */}
+        {/* <button className="text-slate-400 hover:text-white transition-colors">
           <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
           </svg>
-        </button>
-        <Link 
-          to="/signin" 
+        </button> */}
+        <Link
+          to="/signin"
           className="bg-[#22D3EE] text-slate-900 font-bold text-sm px-6 py-2 rounded-full hover:bg-cyan-300 transition-colors"
         >
           Sign-In

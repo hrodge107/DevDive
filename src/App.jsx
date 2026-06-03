@@ -1,8 +1,8 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import LandingPage from './pages/LandingPage';
-import CourseMap from './pages/CourseMap';
-import LessonPage from './pages/LessonPage';
-import ExercisePage from './pages/ExercisePage';
+import LandingPage from './features/landing/pages/LandingPage';
+import CourseMap from './features/course/pages/CourseMap';
+import LessonPage from './features/course/pages/LessonPage';
+import ExercisePage from './features/ide/pages/ExercisePage';
 
 function App() {
   return (

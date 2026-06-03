@@ -1,5 +1,5 @@
-import Header from '../components/Header';
-import { ExerciseContainer } from '../components/ide/ExerciseContainer';
+import Header from '../../../core/components/Header';
+import { ExerciseContainer } from '../components/ExerciseContainer';
 
 export default function ExercisePage() {
   return (

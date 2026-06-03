@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-import whalesharkBg from '../assets/whaleshark.png';
+import Header from '../../../core/components/Header';
+import Footer from '../../../core/components/Footer';
+import whalesharkBg from '../../../assets/whaleshark.png';
 
 export default function LandingPage() {
   return (
