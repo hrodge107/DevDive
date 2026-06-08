@@ -8,9 +8,11 @@ import { ResultsSidebar } from './ResultsSidebar';
 import { AddFileModal } from './AddFileModal';
 import { DeleteFileModal } from './DeleteFileModal';
 import { buildPreviewHtml, injectCSS } from '../../../utils/htmlUtils';
+import { useAuth } from '../../../core/contexts/AuthContext';
 
 export function ExerciseContainer() {
   const { exerciseId } = useParams();
+  const { user } = useAuth();
 
   // --- STATE ---
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -66,7 +68,8 @@ export function ExerciseContainer() {
       setIsLoading(true);
       try {
         // Fetch exercise configuration
-        const res = await fetch(`/exercises/${exerciseId}.json`);
+        const [unitPart, exercisePart] = exerciseId.split('_');
+        const res = await fetch(`/curriculum/${unitPart}/${exercisePart}/exercise.json`);
         if (!res.ok) throw new Error('Exercise not found');
         const config = await res.json();
         setExerciseConfig(config);
@@ -180,10 +183,14 @@ export function ExerciseContainer() {
       // Inject CSS
       htmlContent = injectCSS(htmlContent, files);
 
+      const [unitPart] = exerciseId.split('_');
       const response = await fetch('/api/check', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          userId: user?.id,
+          unitId: unitPart,
+          exerciseId: exerciseId,
           code: { html: htmlContent },
           aiRubric: exerciseConfig?.aiRubric || {},
           captureScreens: ['desktop']

@@ -1,8 +1,16 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 
 export default function Header() {
   const location = useLocation();
   const currentPath = location.pathname;
+  const { user, signOut } = useAuth();
+  const navigate = useNavigate();
+
+  const handleSignOut = async () => {
+    await signOut();
+    navigate('/');
+  };
 
   return (
     <header className="flex items-center justify-between py-4 px-8 border-b border-white/5 bg-transparent w-full z-50">
@@ -34,12 +42,21 @@ export default function Header() {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
           </svg>
         </button> */}
-        <Link
-          to="/signin"
-          className="bg-[#22D3EE] text-slate-900 font-bold text-sm px-6 py-2 rounded-full hover:bg-cyan-300 transition-colors"
-        >
-          Sign-In
-        </Link>
+        {user ? (
+          <button
+            onClick={handleSignOut}
+            className="bg-slate-800 text-slate-300 font-bold text-sm px-6 py-2 rounded-full hover:bg-slate-700 transition-colors"
+          >
+            Sign Out
+          </button>
+        ) : (
+          <Link
+            to="/login"
+            className="bg-[#22D3EE] text-slate-900 font-bold text-sm px-6 py-2 rounded-full hover:bg-cyan-300 transition-colors"
+          >
+            Sign In
+          </Link>
+        )}
       </div>
     </header>
   );

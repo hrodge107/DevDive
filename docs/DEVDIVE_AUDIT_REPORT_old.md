@@ -72,6 +72,8 @@ The frontend avoids complex global state managers (like Redux or Zustand). Accor
 
 ---
 
+## NOTE: The following section has been fixed, but kept for historical purposes.
+
 ## 3. Hosting Feasibility & Resource Analysis
 
 ### Headless Browser Dependencies

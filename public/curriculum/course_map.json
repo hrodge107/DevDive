@@ -8,14 +8,12 @@
                 {
                     "lesson_id": "u1_l1",
                     "title": "Document Structure",
-                    "type": "theory",
-                    "status": "completed"
+                    "type": "theory"
                 },
                 {
                     "lesson_id": "u1_e1",
                     "title": "Hello World in Blue Boxes",
                     "type": "exercise",
-                    "status": "locked",
                     "exercise_ref": "u1_e1"
                 }
             ]
@@ -28,8 +26,7 @@
                 {
                     "lesson_id": "u2_l1",
                     "title": "CSS Fundamentals",
-                    "type": "theory",
-                    "status": "locked"
+                    "type": "theory"
                 }
             ]
         }

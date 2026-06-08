@@ -1,10 +1,11 @@
 import { assembleDocument, normalizeCaptureScreens } from '../../utils/helpers.js';
 import { enqueueScreenshot } from '../browser/playwright.service.js';
 import { evaluateSubmission } from '../ai/gemini.service.js';
+import { supabase } from '../../lib/supabase.js';
 
 export const checkEvaluation = async (req, res) => {
   try {
-    const { code, aiRubric, captureScreens } = req.body;
+    const { code, aiRubric, captureScreens, userId, unitId, exerciseId } = req.body;
     
     if (!code || !code.html || !aiRubric) {
       return res.status(400).json({ error: true, message: 'Missing required code or rubric payload.' });
@@ -34,6 +35,22 @@ export const checkEvaluation = async (req, res) => {
     const totalScore = Math.round(codeScore + visualScore);
 
     console.log(`✓ Evaluation complete: ${codePass}/${codeTotal} code, ${visualPass}/${visualTotal} visual = ${totalScore}/100`);
+
+    // Log progress if passed
+    if (totalScore >= 75 && userId && unitId && exerciseId) {
+      try {
+        await supabase.from('user_progress').insert({
+          user_id: userId,
+          unit_id: unitId,
+          exercise_id: exerciseId,
+          is_completed: true,
+          exercise_score: totalScore
+        });
+        console.log(`Progress logged for user ${userId}`);
+      } catch (err) {
+        console.error('Failed to log progress to Supabase:', err);
+      }
+    }
 
     // 4. Generate targeted hint based on which requirements failed
     let overallHint = '';

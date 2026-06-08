@@ -1,10 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import Header from '../../../core/components/Header';
-import courseMapData from '../../../data/course_map.json';
-
-// Flatten all lessons across all units into a single ordered sequence
-const allLessons = courseMapData.curriculum.flatMap(unit => unit.lessons);
+import { supabase } from '../../../lib/supabaseClient';
+import { useAuth } from '../../../core/contexts/AuthContext';
 
 // Resolve the route path for any lesson item
 const getLessonPath = (item) => {
@@ -12,20 +10,34 @@ const getLessonPath = (item) => {
   return `/lesson/${item.lesson_id}`;
 };
 
-
 export default function LessonPage() {
   const { lessonId } = useParams();
+  const { user } = useAuth();
   const [lessonData, setLessonData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [isCorrect, setIsCorrect] = useState(null);
 
-  // Compute sequential prev/next from the course map — no hardcoding needed
-  const currentIndex = allLessons.findIndex(l => l.lesson_id === lessonId);
-  const prevPath = currentIndex > 0 ? getLessonPath(allLessons[currentIndex - 1]) : '/course-map';
-  const nextPath = currentIndex < allLessons.length - 1 ? getLessonPath(allLessons[currentIndex + 1]) : '/course-map';
-
+  const [prevPath, setPrevPath] = useState('/course-map');
+  const [nextPath, setNextPath] = useState('/course-map');
+  
+  const handleComplete = async () => {
+    if (!user || !lessonId) return;
+    try {
+      const [unitPart] = lessonId.split('_');
+      await supabase.from('user_progress').insert({
+        user_id: user.id,
+        unit_id: unitPart,
+        lesson_id: lessonId,
+        is_completed: true,
+      });
+      // User can click "Next" manually or we can navigate. Keep UI simple.
+      alert('Lesson marked as complete!');
+    } catch (err) {
+      console.error('Error logging progress', err);
+    }
+  };
 
   useEffect(() => {
     const fetchLesson = async () => {
@@ -35,12 +47,24 @@ export default function LessonPage() {
       setIsCorrect(null);
       
       try {
-        const response = await fetch(`/lessons/${lessonId}.json`);
+        const [unitPart, lessonPart] = lessonId.split('_');
+        const response = await fetch(`/curriculum/${unitPart}/${lessonPart}/lesson.json`);
         if (!response.ok) {
           throw new Error('Lesson not found');
         }
         const data = await response.json();
         setLessonData(data);
+
+        // Fetch course map to determine prev/next
+        const mapRes = await fetch('/curriculum/course_map.json');
+        if (mapRes.ok) {
+          const mapData = await mapRes.json();
+          const allLessons = mapData.curriculum.flatMap(unit => unit.lessons);
+          const currentIndex = allLessons.findIndex(l => l.lesson_id === lessonId);
+          
+          if (currentIndex > 0) setPrevPath(getLessonPath(allLessons[currentIndex - 1]));
+          if (currentIndex !== -1 && currentIndex < allLessons.length - 1) setNextPath(getLessonPath(allLessons[currentIndex + 1]));
+        }
       } catch (err) {
         console.error("Error loading lesson:", err);
         setError("Failed to load lesson content. Please try again later.");
@@ -190,7 +214,7 @@ export default function LessonPage() {
             Previous
           </Link>
           
-          <button className="flex items-center gap-2 bg-[#22D3EE] text-[#003546] font-bold text-xs px-6 py-3 rounded uppercase tracking-widest hover:bg-cyan-300 transition-colors">
+          <button onClick={handleComplete} className="flex items-center gap-2 bg-[#22D3EE] text-[#003546] font-bold text-xs px-6 py-3 rounded uppercase tracking-widest hover:bg-cyan-300 transition-colors">
             <svg className="w-4 h-4 text-[#003546]" viewBox="0 0 20 20" fill="currentColor">
               <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
             </svg>

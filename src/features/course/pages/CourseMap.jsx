@@ -1,16 +1,57 @@
 import { useEffect, useState } from 'react';
-import courseMapData from '../../../data/course_map.json';
 import CourseTimeline from '../components/CourseTimeline';
 import Header from '../../../core/components/Header';
 import Footer from '../../../core/components/Footer';
+import { supabase } from '../../../lib/supabaseClient';
+import { useAuth } from '../../../core/contexts/AuthContext';
 
 export default function CourseMap() {
   const [curriculum, setCurriculum] = useState([]);
+  const { user } = useAuth();
 
   useEffect(() => {
-    // In a real app this might be an async fetch from an API
-    setCurriculum(courseMapData.curriculum);
-  }, []);
+    const fetchMap = async () => {
+      try {
+        const response = await fetch('/curriculum/course_map.json');
+        const data = await response.json();
+        
+        let completedLessons = new Set();
+        
+        if (user) {
+          const { data: progress } = await supabase
+            .from('user_progress')
+            .select('lesson_id, exercise_id')
+            .eq('user_id', user.id)
+            .eq('is_completed', true);
+            
+          if (progress) {
+            progress.forEach(p => {
+              if (p.lesson_id) completedLessons.add(p.lesson_id);
+              if (p.exercise_id) completedLessons.add(p.exercise_id);
+            });
+          }
+        }
+        
+        const curriculumWithStatus = data.curriculum.map((unit, uIdx) => ({
+          ...unit,
+          lessons: unit.lessons.map((lesson, lIdx) => {
+            let status = 'locked';
+            if (completedLessons.has(lesson.lesson_id) || completedLessons.has(lesson.exercise_ref)) {
+              status = 'completed';
+            } else if (uIdx === 0 && lIdx === 0) {
+              status = 'in_progress';
+            }
+            return { ...lesson, status };
+          })
+        }));
+        
+        setCurriculum(curriculumWithStatus);
+      } catch (e) {
+        console.error("Failed to load course map", e);
+      }
+    };
+    fetchMap();
+  }, [user]);
 
   return (
     <div className="min-h-screen bg-[#0B1326] text-white font-inter flex flex-col overflow-x-hidden selection:bg-[#22D3EE]/30">
