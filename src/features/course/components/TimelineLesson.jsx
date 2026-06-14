@@ -12,38 +12,38 @@ const InProgressIcon = () => (
   </svg>
 );
 
-const LockedIcon = () => (
+const NotStartedIcon = () => (
   <svg className="w-5 h-5 text-slate-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
     <circle cx="12" cy="12" r="9" strokeWidth="2" />
   </svg>
 );
 
-export default function TimelineLesson({ lesson, index, isLast }) {
-  // Map our internal statuses to the visual states
-  let visualStatus = lesson.status; 
-  if (visualStatus === 'locked' && index === 1) { // Just for visual matching
-      // We will let the unit decide this, or just use lesson.status
-  }
+const PadlockIcon = () => (
+  <svg className="w-5 h-5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+  </svg>
+);
 
-  let Icon = LockedIcon;
+export default function TimelineLesson({ lesson, index, isLast }) {
+  let Icon = NotStartedIcon;
   let statusText = 'START';
   let statusColor = 'text-slate-500';
   
   if (lesson.status === 'completed') {
     Icon = CompletedIcon;
     statusText = 'COMPLETED';
-    statusColor = 'text-slate-500';
-  } else if (lesson.status === 'in_progress') {
-    Icon = InProgressIcon;
-    statusText = 'IN PROGRESS';
-    statusColor = 'text-[#F59E0B]';
+    statusColor = 'text-[#22D3EE]';
+  } else if (lesson.status === 'auth_locked') {
+    Icon = PadlockIcon;
+    statusText = 'LOCKED';
+    statusColor = 'text-red-400';
   }
 
   const content = (
     <div className={`flex items-center justify-between p-4 px-6 hover:bg-white/5 transition-colors cursor-pointer ${!isLast ? 'border-b border-white/5' : ''}`}>
       <div className="flex items-center gap-4">
         <Icon />
-        <span className={`text-sm md:text-base font-medium ${lesson.status === 'locked' ? 'text-slate-400' : 'text-slate-200'}`}>
+        <span className={`text-sm md:text-base font-medium ${lesson.status === 'auth_locked' ? 'text-slate-500' : 'text-slate-200'}`}>
           {index + 1}. {lesson.title}
         </span>
       </div>
@@ -53,9 +53,10 @@ export default function TimelineLesson({ lesson, index, isLast }) {
     </div>
   );
 
-  const linkTarget = lesson.type === 'exercise' && lesson.exercise_ref 
-    ? `/exercise/${lesson.exercise_ref}` 
-    : `/lesson/${lesson.lesson_id}`;
+  const exerciseId = Array.isArray(lesson.exercises) ? lesson.exercises[0]?.id : lesson.exercises?.id;
+  const linkTarget = lesson.status === 'auth_locked'
+    ? `/login?redirect=/exercise/${exerciseId}`
+    : (exerciseId ? `/exercise/${exerciseId}` : `/lesson/${lesson.id}`);
 
   return (
     <Link to={linkTarget} className="block">

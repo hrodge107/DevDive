@@ -9,6 +9,8 @@ import { AddFileModal } from './AddFileModal';
 import { DeleteFileModal } from './DeleteFileModal';
 import { buildPreviewHtml, injectCSS } from '../../../utils/htmlUtils';
 import { useAuth } from '../../../core/contexts/AuthContext';
+import { fetchExerciseConfig } from '../../../services/courseService';
+import { evaluateCode } from '../../../services/evaluationService';
 
 export function ExerciseContainer() {
   const { exerciseId } = useParams();
@@ -67,11 +69,15 @@ export function ExerciseContainer() {
     const loadExercise = async () => {
       setIsLoading(true);
       try {
-        // Fetch exercise configuration
-        const [unitPart, exercisePart] = exerciseId.split('_');
-        const res = await fetch(`/curriculum/${unitPart}/${exercisePart}/exercise.json`);
-        if (!res.ok) throw new Error('Exercise not found');
-        const config = await res.json();
+        const exercise = await fetchExerciseConfig(exerciseId);
+
+        const config = {
+          title: exercise.lessons?.title || 'Exercise',
+          unitId: exercise.lessons?.unit_id,
+          description: exercise.task_description,
+          initialFiles: exercise.starter_files
+        };
+        
         setExerciseConfig(config);
 
         // Hydrate from localStorage if exists, otherwise use initialFiles
@@ -183,22 +189,7 @@ export function ExerciseContainer() {
       // Inject CSS
       htmlContent = injectCSS(htmlContent, files);
 
-      const [unitPart] = exerciseId.split('_');
-      const response = await fetch('/api/check', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          userId: user?.id,
-          unitId: unitPart,
-          exerciseId: exerciseId,
-          code: { html: htmlContent },
-          aiRubric: exerciseConfig?.aiRubric || {},
-          captureScreens: ['desktop']
-        }),
-      });
-
-      const data = await response.json();
-      if (!response.ok) throw new Error(data.message || data.error || 'Evaluation failed');
+      const data = await evaluateCode(user?.id, exerciseConfig?.unitId, exerciseId, htmlContent);
       
       setFeedback(data);
     } catch (error) {
@@ -235,9 +226,9 @@ export function ExerciseContainer() {
     );
   }
 
-  // Calculate scores
-  const codePointsPerReq = exerciseConfig?.aiRubric?.codeRequirements?.length ? 50 / exerciseConfig.aiRubric.codeRequirements.length : 0;
-  const visualPointsPerReq = exerciseConfig?.aiRubric?.visualRequirements?.length ? 50 / exerciseConfig.aiRubric.visualRequirements.length : 0;
+  // Calculate scores using backend-provided points
+  const codePointsPerReq = feedback?.codePointsPerReq || 0;
+  const visualPointsPerReq = feedback?.visualPointsPerReq || 0;
   const codeScore = feedback?.codeEvaluation?.filter(e => e.passed).length * codePointsPerReq || 0;
   const visualScore = feedback?.visualEvaluation?.filter(e => e.passed).length * visualPointsPerReq || 0;
 

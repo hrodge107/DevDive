@@ -5,16 +5,27 @@ import { supabase } from '../../lib/supabase.js';
 
 export const checkEvaluation = async (req, res) => {
   try {
-    const { code, aiRubric, captureScreens, userId, unitId, exerciseId } = req.body;
+    const { code, captureScreens, userId, unitId, exerciseId } = req.body;
     
-    if (!code || !code.html || !aiRubric) {
-      return res.status(400).json({ error: true, message: 'Missing required code or rubric payload.' });
+    if (!code || !code.html || !exerciseId) {
+      return res.status(400).json({ error: true, message: 'Missing required code or exerciseId payload.' });
+    }
+
+    // Fetch rubric securely from Supabase (Service Role Key bypasses RLS)
+    const { data: exerciseData, error: rubricError } = await supabase
+      .from('exercises')
+      .select('ai_rubric')
+      .eq('id', exerciseId)
+      .single();
+
+    if (rubricError || !exerciseData?.ai_rubric) {
+      return res.status(404).json({ error: true, message: 'Exercise rubric not found.' });
     }
 
     const html = code.html || '';
     const css = code.css || '';
     const js = code.js || '';
-    const rubric = aiRubric;
+    const rubric = exerciseData.ai_rubric;
     const screensToCapture = normalizeCaptureScreens(captureScreens);
 
     // 1. Assemble and capture using the Browser Queue
@@ -33,6 +44,9 @@ export const checkEvaluation = async (req, res) => {
     const codeScore = (codePass / codeTotal) * 50;
     const visualScore = (visualPass / visualTotal) * 50;
     const totalScore = Math.round(codeScore + visualScore);
+
+    const codePointsPerReq = rubric.codeRequirements?.length ? 50 / rubric.codeRequirements.length : 0;
+    const visualPointsPerReq = rubric.visualRequirements?.length ? 50 / rubric.visualRequirements.length : 0;
 
     console.log(`✓ Evaluation complete: ${codePass}/${codeTotal} code, ${visualPass}/${visualTotal} visual = ${totalScore}/100`);
 
@@ -80,14 +94,28 @@ export const checkEvaluation = async (req, res) => {
       screenshot: primaryScreenshot,
       overallHint,
       codeEvaluation: evaluation.codeEvaluation || [],
-      visualEvaluation: evaluation.visualEvaluation || []
+      visualEvaluation: evaluation.visualEvaluation || [],
+      codePointsPerReq,
+      visualPointsPerReq
     });
 
   } catch (error) {
     console.error('Check endpoint error:', error);
-    res.status(500).json({ 
+    
+    let statusCode = 500;
+    let message = 'Evaluation failed on the server.';
+    
+    if (error.message.includes('Screenshot') || error.message.includes('Playwright') || error.message.includes('Execution timeout')) {
+      statusCode = 502;
+      message = 'Visual generation service unavailable or timed out.';
+    } else if (error.message.includes('AI') || error.message.includes('Gemini') || error.message.includes('parse AI response')) {
+      statusCode = 502;
+      message = 'AI evaluation service is temporarily unavailable.';
+    }
+
+    res.status(statusCode).json({ 
       error: true, 
-      message: 'Evaluation failed on the server.',
+      message,
       details: error.message
     });
   }

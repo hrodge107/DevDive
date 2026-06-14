@@ -1,0 +1,277 @@
+{
+  "eslint.config.js": {
+    "mtime": 1777453984.3280127,
+    "ast_hash": "3aa4b57d7f08181d86bde52a4dcb7f22",
+    "semantic_hash": ""
+  },
+  "package.json": {
+    "mtime": 1781117844.608855,
+    "ast_hash": "7e7ff539c89bb86df112fed3aeb1b6d3",
+    "semantic_hash": ""
+  },
+  "public/curriculum/course_map.json": {
+    "mtime": 1780929848.4581945,
+    "ast_hash": "0b5c23a788ee692397f6a0006bcf0bae",
+    "semantic_hash": ""
+  },
+  "public/curriculum/u1/e1/exercise.json": {
+    "mtime": 1777749967.547873,
+    "ast_hash": "2b4abd7118f5c3b30779bb31dcd43621",
+    "semantic_hash": ""
+  },
+  "public/curriculum/u1/l1/lesson.json": {
+    "mtime": 1777751768.4190502,
+    "ast_hash": "66f73568bb3c6986a3265369e44e97e8",
+    "semantic_hash": ""
+  },
+  "public/curriculum/u2/l1/lesson.json": {
+    "mtime": 1777751819.7482128,
+    "ast_hash": "06fc6b675a9af1040e7669ef460f03c5",
+    "semantic_hash": ""
+  },
+  "server/index.js": {
+    "mtime": 1780504497.3362062,
+    "ast_hash": "cda14335fcda2ee5bda8594c3b1f5559",
+    "semantic_hash": ""
+  },
+  "server/lib/supabase.js": {
+    "mtime": 1780930096.8763337,
+    "ast_hash": "024ba0177a4623046c2e71e82e717014",
+    "semantic_hash": ""
+  },
+  "server/modules/ai/gemini.service.js": {
+    "mtime": 1780503795.1401556,
+    "ast_hash": "592820f974d12cfcf722d441aaeb3b86",
+    "semantic_hash": ""
+  },
+  "server/modules/browser/playwright.service.js": {
+    "mtime": 1780504503.4992263,
+    "ast_hash": "157daab377c08d87a71c1eb5aa0e1041",
+    "semantic_hash": ""
+  },
+  "server/modules/evaluation/evaluation.controller.js": {
+    "mtime": 1781026793.033495,
+    "ast_hash": "33b495501fa0a9398994b3ab574f4ed4",
+    "semantic_hash": ""
+  },
+  "server/modules/evaluation/evaluation.routes.js": {
+    "mtime": 1780504499.394933,
+    "ast_hash": "008a859b9f8b625a87d9bf9054e0e608",
+    "semantic_hash": ""
+  },
+  "server/utils/helpers.js": {
+    "mtime": 1780503769.8236175,
+    "ast_hash": "fe43c7322a8f1e1a702e9eef7c0f7fc8",
+    "semantic_hash": ""
+  },
+  "src/App.jsx": {
+    "mtime": 1780930009.709531,
+    "ast_hash": "8bfbef2ad2637711e7edf99135cff4ba",
+    "semantic_hash": ""
+  },
+  "src/components/QuizEngine.jsx": {
+    "mtime": 1781063516.5131016,
+    "ast_hash": "20f9800b9f9ab63cd0a781ad67f1fd21",
+    "semantic_hash": ""
+  },
+  "src/core/components/Footer.jsx": {
+    "mtime": 1780501917.059737,
+    "ast_hash": "76f0713c64e159785f39b4ee2c2cfdc4",
+    "semantic_hash": ""
+  },
+  "src/core/components/Header.jsx": {
+    "mtime": 1780930020.0843797,
+    "ast_hash": "3133079e6d0d418e1bf3afc975cf9610",
+    "semantic_hash": ""
+  },
+  "src/core/contexts/AuthContext.jsx": {
+    "mtime": 1780929985.2442608,
+    "ast_hash": "5a7419e7ee9a27d9acfe57e123dd8abc",
+    "semantic_hash": ""
+  },
+  "src/features/auth/pages/LoginPage.jsx": {
+    "mtime": 1781027791.6054819,
+    "ast_hash": "8b078c4f92b5067f93e57cfb43019b0e",
+    "semantic_hash": ""
+  },
+  "src/features/auth/pages/SignupPage.jsx": {
+    "mtime": 1781030934.3321743,
+    "ast_hash": "25a334ea981ca23b8445750991df3d0c",
+    "semantic_hash": ""
+  },
+  "src/features/course/components/CourseTimeline.jsx": {
+    "mtime": 1777747921.2589014,
+    "ast_hash": "c83e18902d4459f68c66ed79e70fbbc4",
+    "semantic_hash": ""
+  },
+  "src/features/course/components/TimelineLesson.jsx": {
+    "mtime": 1781027781.3766537,
+    "ast_hash": "5864948b29cddf2800c027a42ca72a36",
+    "semantic_hash": ""
+  },
+  "src/features/course/components/TimelineUnit.jsx": {
+    "mtime": 1781027153.1108854,
+    "ast_hash": "7cb7cc19dcbc90175d9b79057b986ae9",
+    "semantic_hash": ""
+  },
+  "src/features/course/pages/CourseMap.jsx": {
+    "mtime": 1781027130.4327593,
+    "ast_hash": "3e7f30965f1743fb152ea5459577f594",
+    "semantic_hash": ""
+  },
+  "src/features/course/pages/LessonPage.jsx": {
+    "mtime": 1781118540.903381,
+    "ast_hash": "a8dcfe5586efee46fc8c37dc28d150df",
+    "semantic_hash": ""
+  },
+  "src/features/ide/components/AddFileModal.jsx": {
+    "mtime": 1777748947.6580994,
+    "ast_hash": "2cd53ee1034aa1a2eb92d9ae4b8f6400",
+    "semantic_hash": ""
+  },
+  "src/features/ide/components/CodeEditor.jsx": {
+    "mtime": 1777750749.0117455,
+    "ast_hash": "5fa386094bd64daea61b1735eb2f2b52",
+    "semantic_hash": ""
+  },
+  "src/features/ide/components/DeleteFileModal.jsx": {
+    "mtime": 1777748949.693182,
+    "ast_hash": "4d4f23e9f96e70338caa3eba52370791",
+    "semantic_hash": ""
+  },
+  "src/features/ide/components/ExerciseContainer.jsx": {
+    "mtime": 1781027761.7534208,
+    "ast_hash": "3d5ed4cffa936575c1301f12262f4a82",
+    "semantic_hash": ""
+  },
+  "src/features/ide/components/ProblemSidebar.jsx": {
+    "mtime": 1781028347.4412763,
+    "ast_hash": "e19ce7a694e74ad436cd038a9596aeb5",
+    "semantic_hash": ""
+  },
+  "src/features/ide/components/ResultsSidebar.jsx": {
+    "mtime": 1777792020.4019172,
+    "ast_hash": "acb59696116b14870615d0ddcecb2c9b",
+    "semantic_hash": ""
+  },
+  "src/features/ide/pages/ExercisePage.jsx": {
+    "mtime": 1780504480.652431,
+    "ast_hash": "3ff8551f6a79fe6cf8f119cf5bfb3d39",
+    "semantic_hash": ""
+  },
+  "src/features/landing/pages/LandingPage.jsx": {
+    "mtime": 1780504474.3858314,
+    "ast_hash": "d41b8408708e91f31699def9f0158db6",
+    "semantic_hash": ""
+  },
+  "src/lib/supabaseClient.js": {
+    "mtime": 1780931008.8814754,
+    "ast_hash": "0643a148d9149e37f9d06a64c28e9225",
+    "semantic_hash": ""
+  },
+  "src/main.jsx": {
+    "mtime": 1777453984.6503057,
+    "ast_hash": "e13723e2574429d9a6d849727e3ff695",
+    "semantic_hash": ""
+  },
+  "src/utils/htmlUtils.js": {
+    "mtime": 1777748435.4504876,
+    "ast_hash": "bd01332df20bc3b8afaabec7b159f3d4",
+    "semantic_hash": ""
+  },
+  "tailwind.config.js": {
+    "mtime": 1781028345.3616843,
+    "ast_hash": "eed2bc1ffd328be47a81eb70000544fd",
+    "semantic_hash": ""
+  },
+  "vite.config.js": {
+    "mtime": 1777749453.9266539,
+    "ast_hash": "9efe5a10d88681cf3c412cb2c01f3854",
+    "semantic_hash": ""
+  },
+  ".agents/rules/graphify.md": {
+    "mtime": 1781442447.4565709,
+    "ast_hash": "a0e4d192b9e2e17256124dbfc8e24e6a",
+    "semantic_hash": ""
+  },
+  ".agents/workflows/graphify.md": {
+    "mtime": 1781442447.4722,
+    "ast_hash": "637776aa6f7496d069afe7520c845c8a",
+    "semantic_hash": ""
+  },
+  "docs/old/ARCHITECTURE.md": {
+    "mtime": 1777746404.734296,
+    "ast_hash": "2f9f15991dd8d81153a13c52bfe06661",
+    "semantic_hash": ""
+  },
+  "docs/old/DEVDIVE_AUDIT_REPORT_old.md": {
+    "mtime": 1780506365.8399496,
+    "ast_hash": "72a6227df526deb78d319ffe65f49cad",
+    "semantic_hash": ""
+  },
+  "docs/old/README.md": {
+    "mtime": 1777453984.674898,
+    "ast_hash": "a28dc4cb878325f3e9e5649f3e1469ac",
+    "semantic_hash": ""
+  },
+  "docs/relevant/DOCUMENTATION.md": {
+    "mtime": 1780506568.790015,
+    "ast_hash": "e9ae08d8be7448a435ea8b67995046e3",
+    "semantic_hash": ""
+  },
+  "docs/relevant/SUPABASE_ARCHITECHTURE.md": {
+    "mtime": 1781028553.2743528,
+    "ast_hash": "3d543bfed089b7a1aeae9fc14bd1a816",
+    "semantic_hash": ""
+  },
+  "docs/relevant/SUPABASE_INTEGRATION_PLAN.md": {
+    "mtime": 1780930249.2198954,
+    "ast_hash": "c49c61cb286842299c953ae19fed3e64",
+    "semantic_hash": ""
+  },
+  "docs/relevant/supabase_migration.md": {
+    "mtime": 1781026281.40108,
+    "ast_hash": "cb32bf56057f3abfdec425e811732587",
+    "semantic_hash": ""
+  },
+  "index.html": {
+    "mtime": 1777745438.3688893,
+    "ast_hash": "4415f633005693e15afff8d0c718a637",
+    "semantic_hash": ""
+  },
+  "src/features/ide/components/Untitled-1.txt": {
+    "mtime": 1778656439.2870097,
+    "ast_hash": "dc8489af0df1b20c8f4face0bc51ec59",
+    "semantic_hash": ""
+  },
+  "public/favicon.svg": {
+    "mtime": 1777453984.924853,
+    "ast_hash": "7e840862161341271697daa99a40d76b",
+    "semantic_hash": ""
+  },
+  "public/icons.svg": {
+    "mtime": 1777453985.0310836,
+    "ast_hash": "3b4fcfcf393eca4d264dca4a4663bc37",
+    "semantic_hash": ""
+  },
+  "src/assets/hero.png": {
+    "mtime": 1777453984.7748342,
+    "ast_hash": "aead493361b27e7510691c5d7072dfc1",
+    "semantic_hash": ""
+  },
+  "src/assets/react.svg": {
+    "mtime": 1777453985.1515484,
+    "ast_hash": "f0402b67b6ce880f65666bb49e841696",
+    "semantic_hash": ""
+  },
+  "src/assets/vite.svg": {
+    "mtime": 1777453985.2559102,
+    "ast_hash": "9960a24288958394ac50e57ff638b036",
+    "semantic_hash": ""
+  },
+  "src/assets/whaleshark.png": {
+    "mtime": 1776967164.1878273,
+    "ast_hash": "afaf79ff13e43dbcf603fd778c59fb23",
+    "semantic_hash": ""
+  }
+}

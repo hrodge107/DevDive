@@ -4,8 +4,8 @@ import TimelineLesson from './TimelineLesson';
 export default function TimelineUnit({ unit, index }) {
   const [isExpanded, setIsExpanded] = useState(index === 0);
 
-  // Parse unit number (e.g., 'u1' -> '01')
-  const unitNum = unit.unit_id.replace('u', '').padStart(2, '0');
+  // Parse unit number
+  const unitNum = unit.unit_number.toString().padStart(2, '0');
   const isFirstUnit = index === 0;
 
   return (
@@ -51,20 +51,11 @@ export default function TimelineUnit({ unit, index }) {
           <div className="border-t border-white/5 bg-[#131A2B]">
             {unit.lessons.map((lesson, idx) => {
               let computedStatus = lesson.status;
-              
-              // Infer in-progress status
-              if (computedStatus === 'locked') {
-                if (idx === 0) {
-                  computedStatus = 'in_progress';
-                } else if (unit.lessons[idx - 1].status === 'completed') {
-                  computedStatus = 'in_progress';
-                }
-              }
 
               return (
                 <TimelineLesson 
-                  key={lesson.lesson_id} 
-                  lesson={{...lesson, status: computedStatus}} 
+                  key={lesson.id} 
+                  lesson={{...lesson}} 
                   index={idx}
                   isLast={idx === unit.lessons.length - 1}
                 />

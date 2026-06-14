@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { supabase } from '../../../lib/supabaseClient';
 import Header from '../../../core/components/Header';
 import Footer from '../../../core/components/Footer';
@@ -10,6 +10,7 @@ export default function LoginPage() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -25,7 +26,8 @@ export default function LoginPage() {
       setError(error.message);
       setLoading(false);
     } else {
-      navigate('/course-map');
+      const redirect = searchParams.get('redirect');
+      navigate(redirect || '/course-map');
     }
   };
 

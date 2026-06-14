@@ -2,52 +2,67 @@ import { useEffect, useState } from 'react';
 import CourseTimeline from '../components/CourseTimeline';
 import Header from '../../../core/components/Header';
 import Footer from '../../../core/components/Footer';
-import { supabase } from '../../../lib/supabaseClient';
 import { useAuth } from '../../../core/contexts/AuthContext';
+import { fetchCurriculum } from '../../../services/courseService';
+import { fetchUserProgress } from '../../../services/progressService';
 
 export default function CourseMap() {
   const [curriculum, setCurriculum] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
   const { user } = useAuth();
 
   useEffect(() => {
     const fetchMap = async () => {
+      setIsLoading(true);
+      setError(null);
       try {
-        const response = await fetch('/curriculum/course_map.json');
-        const data = await response.json();
+        const [curriculumData, progress] = await Promise.all([
+          fetchCurriculum(), 
+          fetchUserProgress(user?.id)
+        ]);
         
         let completedLessons = new Set();
+        let completedExercises = new Set();
         
-        if (user) {
-          const { data: progress } = await supabase
-            .from('user_progress')
-            .select('lesson_id, exercise_id')
-            .eq('user_id', user.id)
-            .eq('is_completed', true);
-            
-          if (progress) {
-            progress.forEach(p => {
-              if (p.lesson_id) completedLessons.add(p.lesson_id);
-              if (p.exercise_id) completedLessons.add(p.exercise_id);
-            });
-          }
+        if (progress) {
+          progress.forEach(p => {
+            if (p.lesson_id) completedLessons.add(p.lesson_id);
+            if (p.exercise_id) completedExercises.add(p.exercise_id);
+          });
         }
         
-        const curriculumWithStatus = data.curriculum.map((unit, uIdx) => ({
+        // Phase 3: Map over Tree & Compute Status
+        const curriculumWithStatus = curriculumData.map((unit, uIdx) => ({
           ...unit,
           lessons: unit.lessons.map((lesson, lIdx) => {
-            let status = 'locked';
-            if (completedLessons.has(lesson.lesson_id) || completedLessons.has(lesson.exercise_ref)) {
+            const hasExercise = Array.isArray(lesson.exercises) ? lesson.exercises.length > 0 : !!lesson.exercises;
+            const exerciseId = Array.isArray(lesson.exercises) ? lesson.exercises[0]?.id : lesson.exercises?.id;
+            
+            const isCompleted = exerciseId 
+              ? completedExercises.has(exerciseId) 
+              : completedLessons.has(lesson.id);
+
+            // Default to 'not_started' (open and clickable) instead of 'locked'
+            let status = 'not_started'; 
+
+            if (isCompleted) {
               status = 'completed';
-            } else if (uIdx === 0 && lIdx === 0) {
-              status = 'in_progress';
+            } else if (!user && hasExercise) {
+              // Enforce Guest Rule: If they aren't logged in and it has an exercise, lock it
+              status = 'auth_locked'; 
             }
-            return { ...lesson, status };
+            
+            return { ...lesson, status, hasExercise };
           })
         }));
         
         setCurriculum(curriculumWithStatus);
       } catch (e) {
         console.error("Failed to load course map", e);
+        setError("Failed to load curriculum. Please try again.");
+      } finally {
+        setIsLoading(false);
       }
     };
     fetchMap();
@@ -73,11 +88,19 @@ export default function CourseMap() {
 
         {/* Presentational Timeline */}
         <section className="px-4 relative z-10">
-          {curriculum.length > 0 ? (
-            <CourseTimeline curriculum={curriculum} />
-          ) : (
+          {isLoading ? (
             <div className="flex justify-center py-32">
               <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#22D3EE] shadow-[0_0_15px_rgba(34,211,238,0.5)]"></div>
+            </div>
+          ) : error ? (
+            <div className="flex justify-center py-32 text-red-400">
+              <p>{error}</p>
+            </div>
+          ) : curriculum.length > 0 ? (
+            <CourseTimeline curriculum={curriculum} />
+          ) : (
+            <div className="flex justify-center py-32 text-slate-400">
+              <p>No curriculum found.</p>
             </div>
           )}
         </section>

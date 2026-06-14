@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 @config "../tailwind.config.js";
 
 /* Scrollbar styles to match the devdive color theme */
