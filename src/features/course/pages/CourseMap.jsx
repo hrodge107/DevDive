@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import CourseTimeline from '../components/CourseTimeline';
 import Header from '../../../core/components/Header';
 import Footer from '../../../core/components/Footer';
+import Sidebar from '../components/Sidebar';
 import { useAuth } from '../../../core/contexts/AuthContext';
 import { fetchCurriculum } from '../../../services/courseService';
 import { fetchUserProgress } from '../../../services/progressService';
@@ -48,9 +49,6 @@ export default function CourseMap() {
 
             if (isCompleted) {
               status = 'completed';
-            } else if (!user && hasExercise) {
-              // Enforce Guest Rule: If they aren't logged in and it has an exercise, lock it
-              status = 'auth_locked'; 
             }
             
             return { ...lesson, status, hasExercise };
@@ -68,45 +66,56 @@ export default function CourseMap() {
     fetchMap();
   }, [user]);
 
+  const [isSidebarExpanded, setIsSidebarExpanded] = useState(false);
+
   return (
-    <div className="min-h-screen bg-[#0B1326] text-white font-inter flex flex-col overflow-x-hidden selection:bg-[#22D3EE]/30">
-      <Header />
+    <div className="min-h-screen bg-[#0B1326] text-white font-inter flex flex-col overflow-hidden selection:bg-[#22D3EE]/30">
+      <Header
+        showSidebarToggle={true}
+        onToggleSidebar={() => setIsSidebarExpanded(!isSidebarExpanded)}
+      />
       
-      <main className="flex-1 pb-24 relative">
-        {/* Abstract background glows */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-[#22D3EE]/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="flex flex-1 relative w-full overflow-hidden">
+        <Sidebar isExpanded={isSidebarExpanded} />
         
-        {/* Header section */}
-        <section className="pt-16 pb-12 px-4 text-center relative z-10">
-          <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4 font-serif">
-            Course Map
-          </h1>
-          <p className="text-slate-400 text-base sm:text-lg max-w-lg mx-auto font-light leading-relaxed">
-            Your journey through the fundamentals of web development. Follow the path to build your core skills.
-          </p>
-        </section>
+        <main className="flex-1 relative overflow-y-auto h-[calc(100vh-64px)] flex flex-col justify-between">
+          <div className="pb-24">
+            {/* Abstract background glows */}
+            <div className="absolute top-0 right-0 w-96 h-96 bg-[#22D3EE]/5 rounded-full blur-[120px] pointer-events-none animate-pulse" />
+            
+            {/* Header section */}
+            <section className="pt-16 pb-12 px-4 text-center relative z-10 animate-fade-in">
+              <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4 font-serif">
+                Course Map
+              </h1>
+              <p className="text-slate-400 text-base sm:text-lg max-w-lg mx-auto font-light leading-relaxed">
+                Your journey through the fundamentals of web development. Follow the path to build your core skills.
+              </p>
+            </section>
 
-        {/* Presentational Timeline */}
-        <section className="px-4 relative z-10">
-          {isLoading ? (
-            <div className="flex justify-center py-32">
-              <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#22D3EE] shadow-[0_0_15px_rgba(34,211,238,0.5)]"></div>
-            </div>
-          ) : error ? (
-            <div className="flex justify-center py-32 text-red-400">
-              <p>{error}</p>
-            </div>
-          ) : curriculum.length > 0 ? (
-            <CourseTimeline curriculum={curriculum} />
-          ) : (
-            <div className="flex justify-center py-32 text-slate-400">
-              <p>No curriculum found.</p>
-            </div>
-          )}
-        </section>
-      </main>
-
-      <Footer />
+            {/* Presentational Timeline */}
+            <section className="px-4 relative z-10">
+              {isLoading ? (
+                <div className="flex justify-center py-32">
+                  <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#22D3EE] shadow-[0_0_15px_rgba(34,211,238,0.5)]"></div>
+                </div>
+              ) : error ? (
+                <div className="flex justify-center py-32 text-red-400">
+                  <p>{error}</p>
+                </div>
+              ) : curriculum.length > 0 ? (
+                <CourseTimeline curriculum={curriculum} />
+              ) : (
+                <div className="flex justify-center py-32 text-slate-400">
+                  <p>No curriculum found.</p>
+                </div>
+              )}
+            </section>
+          </div>
+          
+          <Footer />
+        </main>
+      </div>
     </div>
   );
 }

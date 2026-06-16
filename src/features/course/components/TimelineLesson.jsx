@@ -33,17 +33,13 @@ export default function TimelineLesson({ lesson, index, isLast }) {
     Icon = CompletedIcon;
     statusText = 'COMPLETED';
     statusColor = 'text-[#22D3EE]';
-  } else if (lesson.status === 'auth_locked') {
-    Icon = PadlockIcon;
-    statusText = 'LOCKED';
-    statusColor = 'text-red-400';
   }
 
   const content = (
     <div className={`flex items-center justify-between p-4 px-6 hover:bg-white/5 transition-colors cursor-pointer ${!isLast ? 'border-b border-white/5' : ''}`}>
       <div className="flex items-center gap-4">
         <Icon />
-        <span className={`text-sm md:text-base font-medium ${lesson.status === 'auth_locked' ? 'text-slate-500' : 'text-slate-200'}`}>
+        <span className="text-sm md:text-base font-medium text-slate-200">
           {index + 1}. {lesson.title}
         </span>
       </div>
@@ -54,9 +50,7 @@ export default function TimelineLesson({ lesson, index, isLast }) {
   );
 
   const exerciseId = Array.isArray(lesson.exercises) ? lesson.exercises[0]?.id : lesson.exercises?.id;
-  const linkTarget = lesson.status === 'auth_locked'
-    ? `/login?redirect=/exercise/${exerciseId}`
-    : (exerciseId ? `/exercise/${exerciseId}` : `/lesson/${lesson.id}`);
+  const linkTarget = exerciseId ? `/exercise/${exerciseId}` : `/lesson/${lesson.id}`;
 
   return (
     <Link to={linkTarget} className="block">

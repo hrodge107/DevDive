@@ -287,6 +287,44 @@ export function ExerciseContainer() {
           onCancel={() => setIsDeleteModalOpen(false)}
         />
       )}
+
+      {/* Guest Lock Overlay */}
+      {!user && (
+        <div 
+          className="absolute top-0 right-0 bottom-0 z-40 flex flex-col items-center justify-center bg-black/50 backdrop-blur-md transition-all duration-300 select-none"
+          style={{ left: isSidebarOpen ? sidebarWidth : 0 }}
+        >
+          <div className="bg-gray-900 border border-gray-800 rounded-xl shadow-2xl w-full max-w-sm overflow-hidden animate-in fade-in zoom-in-95 duration-200 p-6 space-y-6 text-center mx-4">
+            <div className="w-16 h-16 bg-[#22D3EE]/10 rounded-2xl flex items-center justify-center mx-auto text-[#22D3EE] shadow-[0_0_15px_rgba(34,211,238,0.1)]">
+              <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+              </svg>
+            </div>
+            
+            <div className="space-y-2">
+              <h3 className="text-xl font-bold text-white tracking-tight">Sign In Required</h3>
+              <p className="text-gray-400 text-sm leading-relaxed">
+                To start coding and get AI feedback on this exercise, please sign in or create a free account.
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-3 pt-2">
+              <a
+                href={`/login?redirect=/exercise/${exerciseId}`}
+                className="w-full py-3 bg-[#22D3EE] hover:bg-cyan-300 text-slate-900 rounded-lg transition-all shadow-lg shadow-cyan-500/20 text-sm font-bold flex items-center justify-center"
+              >
+                Sign In
+              </a>
+              <a
+                href={`/signup?redirect=/exercise/${exerciseId}`}
+                className="w-full py-3 border border-gray-700 hover:border-gray-600 hover:bg-gray-800/50 text-gray-300 hover:text-white rounded-lg transition-colors text-sm font-semibold flex items-center justify-center"
+              >
+                Create Account
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -78,7 +78,6 @@ export default function LessonPage() {
 
           const getPath = (lessonObj) => {
             const exerciseId = Array.isArray(lessonObj.exercises) ? lessonObj.exercises[0]?.id : lessonObj.exercises?.id;
-            if (!user && exerciseId) return `/login?redirect=/exercise/${exerciseId}`;
             return exerciseId ? `/exercise/${exerciseId}` : `/lesson/${lessonObj.id}`;
           };
 

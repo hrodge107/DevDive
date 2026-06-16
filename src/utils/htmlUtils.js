@@ -2,34 +2,60 @@ export const injectCSS = (htmlContent, files) => {
   const linkRegex = /<link[^>]*rel="stylesheet"[^>]*href="([^"]+)"[^>]*>|<link[^>]*href="([^"]+)"[^>]*rel="stylesheet"[^>]*>/gi;
   
   const cssInjections = [];
-  let match;
   
-  while ((match = linkRegex.exec(htmlContent)) !== null) {
-    // Group 1 is from first pattern, Group 2 is from second pattern
-    const cssFileName = match[1] || match[2];
+  // Replace only links that correspond to local files, keep external ones
+  const injectedHtml = htmlContent.replace(linkRegex, (match, href1, href2) => {
+    const cssFileName = href1 || href2;
     const cssFile = files.find(f => f.name === cssFileName);
-    
     if (cssFile) {
       cssInjections.push(`<style>${cssFile.content}</style>`);
+      return '';
     }
-  }
-  
-  // Remove all link tags (both patterns)
-  let injectedHtml = htmlContent.replace(linkRegex, '');
+    return match;
+  });
   
   // Insert the style tags right after the opening head tag
-  const headCloseIndex = injectedHtml.indexOf('</head>');
+  let finalHtml = injectedHtml;
+  const headCloseIndex = finalHtml.indexOf('</head>');
   if (headCloseIndex !== -1) {
-    injectedHtml = injectedHtml.slice(0, headCloseIndex) + cssInjections.join('\n') + injectedHtml.slice(headCloseIndex);
+    finalHtml = finalHtml.slice(0, headCloseIndex) + cssInjections.join('\n') + finalHtml.slice(headCloseIndex);
   } else {
     // If no </head>, add styles before <body>
-    const bodyIndex = injectedHtml.indexOf('<body>');
+    const bodyIndex = finalHtml.indexOf('<body>');
     if (bodyIndex !== -1) {
-      injectedHtml = injectedHtml.slice(0, bodyIndex) + cssInjections.join('\n') + injectedHtml.slice(bodyIndex);
+      finalHtml = finalHtml.slice(0, bodyIndex) + cssInjections.join('\n') + finalHtml.slice(bodyIndex);
     }
   }
   
-  return injectedHtml;
+  return finalHtml;
+};
+
+export const injectJS = (htmlContent, files) => {
+  const scriptRegex = /<script[^>]*src=["']([^"']+)["'][^>]*>(?:<\/script>)?/gi;
+  
+  const jsInjections = [];
+  
+  // Replace only scripts that correspond to local files, keep external ones (e.g. CDNs)
+  const injectedHtml = htmlContent.replace(scriptRegex, (match, src) => {
+    const jsFile = files.find(f => f.name === src);
+    if (jsFile) {
+      jsInjections.push(`<script>${jsFile.content}</script>`);
+      return '';
+    }
+    return match;
+  });
+  
+  // Append JS script tags before </body>
+  let finalHtml = injectedHtml;
+  const bodyCloseIndex = finalHtml.indexOf('</body>');
+  if (bodyCloseIndex !== -1) {
+    finalHtml = finalHtml.slice(0, bodyCloseIndex) + jsInjections.join('\n') + finalHtml.slice(bodyCloseIndex);
+  } else {
+    // If no </body>, just append at the end
+    finalHtml = finalHtml + '\n' + jsInjections.join('\n');
+  }
+  
+  return finalHtml;
 };
 
 export const buildPreviewHtml = (files) => {
@@ -45,8 +71,9 @@ export const buildPreviewHtml = (files) => {
   const htmlFile = files.find(f => f.name === 'index.html');
   let htmlContent = htmlFile?.content || '';
 
-  // Inject CSS and get processed HTML
+  // Inject CSS and JS and get processed HTML
   htmlContent = injectCSS(htmlContent, files);
+  htmlContent = injectJS(htmlContent, files);
 
   // Create the master HTML document with routing system
   const masterHtml = `
@@ -61,7 +88,7 @@ export const buildPreviewHtml = (files) => {
         ${htmlContent}
         <script>
           // Store all HTML files for routing
-          const pages = ${JSON.stringify(htmlFiles)};
+          const pages = ${JSON.stringify(htmlFiles).replace(/<\/script>/gi, '<\\/script>')};
           
           // Function to attach navigation handlers
           function attachNavHandlers() {

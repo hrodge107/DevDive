@@ -4,8 +4,10 @@ import LandingPage from './features/landing/pages/LandingPage';
 import CourseMap from './features/course/pages/CourseMap';
 import LessonPage from './features/course/pages/LessonPage';
 import ExercisePage from './features/ide/pages/ExercisePage';
+import PlaygroundPage from './features/ide/pages/PlaygroundPage';
 import LoginPage from './features/auth/pages/LoginPage';
 import SignupPage from './features/auth/pages/SignupPage';
+import ProfilePage from './features/auth/pages/ProfilePage';
 
 function App() {
   return (
@@ -16,8 +18,10 @@ function App() {
           <Route path="/course-map" element={<CourseMap />} />
           <Route path="/lesson/:lessonId" element={<LessonPage />} />
           <Route path="/exercise/:exerciseId" element={<ExercisePage />} />
+          <Route path="/playground" element={<PlaygroundPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>
