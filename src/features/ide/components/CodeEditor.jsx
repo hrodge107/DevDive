@@ -12,6 +12,7 @@ export function CodeEditor({
   onPreview,
   onSubmit,
   isEvaluating,
+  cooldownRemaining,
   isSidebarOpen,
   onToggleSidebar,
   showSidebarToggle = true,
@@ -134,17 +135,25 @@ export function CodeEditor({
         </button>
         {showSubmit && (
           <button 
-            className="px-6 py-2.5 bg-blue-600 hover:bg-blue-500 active:bg-blue-700 disabled:bg-blue-800 disabled:text-gray-400 disabled:shadow-none disabled:border-transparent text-white font-semibold rounded-lg transition-all shadow-md shadow-blue-500/20 flex items-center gap-2 text-sm border border-blue-500/50 hover:border-blue-400/50"
+            className="px-6 py-2.5 bg-[#22D3EE] hover:bg-cyan-300 active:bg-cyan-400 disabled:bg-cyan-950/40 disabled:text-cyan-700/60 disabled:border-cyan-950/30 disabled:shadow-none disabled:cursor-not-allowed text-slate-950 font-bold rounded-lg transition-all shadow-md shadow-cyan-500/25 flex items-center gap-2 text-sm border border-cyan-400/50 hover:border-cyan-300/50"
             onClick={onSubmit} 
-            disabled={isEvaluating}
+            disabled={isEvaluating || cooldownRemaining > 0}
           >
             {isEvaluating ? (
               <>
-                <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-slate-950" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                   <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                   <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                 </svg>
                 EVALUATING...
+              </>
+            ) : cooldownRemaining > 0 ? (
+              <>
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="10" />
+                  <polyline points="12 6 12 12 16 14" />
+                </svg>
+                COOLDOWN ({cooldownRemaining}s)
               </>
             ) : (
               <>

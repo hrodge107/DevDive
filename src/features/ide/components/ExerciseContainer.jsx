@@ -10,7 +10,7 @@ import { DeleteFileModal } from './DeleteFileModal';
 import { buildPreviewHtml, injectCSS } from '../../../utils/htmlUtils';
 import { useAuth } from '../../../core/contexts/AuthContext';
 import { fetchExerciseConfig } from '../../../services/courseService';
-import { evaluateCode } from '../../../services/evaluationService';
+import { evaluateCode as evaluateCodeService } from '../../../services/evaluationService';
 
 export function ExerciseContainer() {
   const { exerciseId } = useParams();
@@ -22,7 +22,7 @@ export function ExerciseContainer() {
   const [isResizing, setIsResizing] = useState(false);
   const [exerciseConfig, setExerciseConfig] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  
+
   const [files, setFiles] = useState([]);
   const [activeFileName, setActiveFileName] = useState('');
   const [currentPreviewUrl, setCurrentPreviewUrl] = useState(null);
@@ -30,6 +30,7 @@ export function ExerciseContainer() {
   const [showResults, setShowResults] = useState(false);
   const [feedback, setFeedback] = useState(null);
   const [isEvaluating, setIsEvaluating] = useState(false);
+  const [cooldownRemaining, setCooldownRemaining] = useState(0);
   const [expandedSections, setExpandedSections] = useState({
     codebase: true,
     visual: true,
@@ -44,7 +45,7 @@ export function ExerciseContainer() {
   const filesRef = useRef(files);
 
   // --- EFFECTS ---
-  
+
   // Update ref when files change
   useEffect(() => {
     filesRef.current = files;
@@ -77,7 +78,7 @@ export function ExerciseContainer() {
           description: exercise.task_description,
           initialFiles: exercise.starter_files
         };
-        
+
         setExerciseConfig(config);
 
         // Hydrate from localStorage if exists, otherwise use initialFiles
@@ -125,11 +126,21 @@ export function ExerciseContainer() {
     };
   }, [isResizing]);
 
+  // Cooldown Timer
+  useEffect(() => {
+    if (cooldownRemaining > 0) {
+      const timer = setInterval(() => {
+        setCooldownRemaining((prev) => prev - 1);
+      }, 1000);
+      return () => clearInterval(timer);
+    }
+  }, [cooldownRemaining]);
+
   // --- HANDLERS ---
   const activeFile = files.find(f => f.name === activeFileName);
 
   const handleEditorChange = (value) => {
-    const updatedFiles = files.map(file => 
+    const updatedFiles = files.map(file =>
       file.name === activeFileName ? { ...file, content: value } : file
     );
     setFiles(updatedFiles);
@@ -182,15 +193,15 @@ export function ExerciseContainer() {
     if (feedback && !isResubmit) return;
 
     setIsEvaluating(true);
-    
+
     try {
       const htmlFile = files.find(f => f.name === 'index.html');
       let htmlContent = htmlFile?.content || '';
       // Inject CSS
       htmlContent = injectCSS(htmlContent, files);
 
-      const data = await evaluateCode(user?.id, exerciseConfig?.unitId, exerciseId, htmlContent);
-      
+      const data = await evaluateCodeService(user?.id, exerciseConfig?.unitId, exerciseId, htmlContent);
+
       setFeedback(data);
     } catch (error) {
       console.error('Evaluation error:', error);
@@ -205,6 +216,7 @@ export function ExerciseContainer() {
       });
     } finally {
       setIsEvaluating(false);
+      setCooldownRemaining(10);
     }
   };
 
@@ -253,6 +265,7 @@ export function ExerciseContainer() {
         onPreview={handlePreview}
         onSubmit={handleSubmit}
         isEvaluating={isEvaluating}
+        cooldownRemaining={cooldownRemaining}
         isSidebarOpen={isSidebarOpen}
         onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
       />
@@ -261,6 +274,7 @@ export function ExerciseContainer() {
         <ResultsSidebar
           feedback={feedback}
           isEvaluating={isEvaluating}
+          cooldownRemaining={cooldownRemaining}
           expandedSections={expandedSections}
           onToggleSection={toggleSection}
           onClose={() => setShowResults(false)}
@@ -290,7 +304,7 @@ export function ExerciseContainer() {
 
       {/* Guest Lock Overlay */}
       {!user && (
-        <div 
+        <div
           className="absolute top-0 right-0 bottom-0 z-40 flex flex-col items-center justify-center bg-black/50 backdrop-blur-md transition-all duration-300 select-none"
           style={{ left: isSidebarOpen ? sidebarWidth : 0 }}
         >
@@ -300,7 +314,7 @@ export function ExerciseContainer() {
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
               </svg>
             </div>
-            
+
             <div className="space-y-2">
               <h3 className="text-xl font-bold text-white tracking-tight">Sign In Required</h3>
               <p className="text-gray-400 text-sm leading-relaxed">

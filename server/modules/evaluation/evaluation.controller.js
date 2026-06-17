@@ -6,7 +6,7 @@ import { supabase } from '../../lib/supabase.js';
 export const checkEvaluation = async (req, res) => {
   try {
     const { code, captureScreens, userId, unitId, exerciseId } = req.body;
-    
+
     if (!code || !code.html || !exerciseId) {
       return res.status(400).json({ error: true, message: 'Missing required code or exerciseId payload.' });
     }
@@ -67,22 +67,25 @@ export const checkEvaluation = async (req, res) => {
     }
 
     // 4. Generate targeted hint based on which requirements failed
-    let overallHint = '';
-    const failedCode = (evaluation.codeEvaluation || []).filter(e => !e.passed);
-    const failedVisual = (evaluation.visualEvaluation || []).filter(e => !e.passed);
-    const hasFailedCode = failedCode.length > 0;
-    const hasFailedVisual = failedVisual.length > 0;
+    let overallHint = evaluation.overallHint;
+    
+    if (!overallHint) {
+      const failedCode = (evaluation.codeEvaluation || []).filter(e => !e.passed);
+      const failedVisual = (evaluation.visualEvaluation || []).filter(e => !e.passed);
+      const hasFailedCode = failedCode.length > 0;
+      const hasFailedVisual = failedVisual.length > 0;
 
-    if (totalScore >= 75) {
-      overallHint = '🎉 Excellent! Your submission meets all requirements. Keep up the great work!';
-    } else if (hasFailedCode && hasFailedVisual) {
-      overallHint = '💡 Review both your code structure and visual output to match all requirements.';
-    } else if (hasFailedCode) {
-      overallHint = '👨‍💻 Your visual output looks good! Debug your code to ensure all logic requirements are met.';
-    } else if (hasFailedVisual) {
-      overallHint = '🎨 Your code logic is solid! Focus on the visual design to match the requirements exactly.';
-    } else {
-      overallHint = '📚 Review all the failed requirements carefully and test your changes thoroughly.';
+      if (totalScore >= 75) {
+        overallHint = '🎉 Excellent! Your submission meets all requirements. Keep up the great work!';
+      } else if (hasFailedCode && hasFailedVisual) {
+        overallHint = '💡 Review both your code structure and visual output to match all requirements.';
+      } else if (hasFailedCode) {
+        overallHint = '👨‍💻 Your visual output looks good! Debug your code to ensure all logic requirements are met.';
+      } else if (hasFailedVisual) {
+        overallHint = '🎨 Your code logic is solid! Focus on the visual design to match the requirements exactly.';
+      } else {
+        overallHint = '📚 Review all the failed requirements carefully and test your changes thoroughly.';
+      }
     }
 
     const primaryScreenshot = screenshots.desktop || screenshots.mobile || null;
@@ -101,10 +104,10 @@ export const checkEvaluation = async (req, res) => {
 
   } catch (error) {
     console.error('Check endpoint error:', error);
-    
+
     let statusCode = 500;
     let message = 'Evaluation failed on the server.';
-    
+
     if (error.message.includes('Screenshot') || error.message.includes('Playwright') || error.message.includes('Execution timeout')) {
       statusCode = 502;
       message = 'Visual generation service unavailable or timed out.';
@@ -113,8 +116,8 @@ export const checkEvaluation = async (req, res) => {
       message = 'AI evaluation service is temporarily unavailable.';
     }
 
-    res.status(statusCode).json({ 
-      error: true, 
+    res.status(statusCode).json({
+      error: true,
       message,
       details: error.message
     });

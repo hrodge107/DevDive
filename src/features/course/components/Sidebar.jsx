@@ -43,8 +43,8 @@ export default function Sidebar({ isExpanded }) {
                 key={item.name}
                 to={item.path}
                 className={`flex items-center gap-4 py-3 px-3 rounded-lg font-medium text-sm transition-all duration-200 relative group overflow-hidden ${active
-                    ? 'bg-[#22D3EE]/10 text-[#22D3EE]'
-                    : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/40'
+                  ? 'bg-[#22D3EE]/10 text-[#22D3EE]'
+                  : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/40'
                   }`}
               >
                 {/* Left Active Border indicator */}
@@ -60,8 +60,8 @@ export default function Sidebar({ isExpanded }) {
                 {/* Text Label */}
                 <span
                   className={`whitespace-nowrap transition-all duration-300 ${isExpanded
-                      ? 'opacity-100 translate-x-0'
-                      : 'opacity-0 translate-x-4 pointer-events-none absolute'
+                    ? 'opacity-100 translate-x-0'
+                    : 'opacity-0 translate-x-4 pointer-events-none absolute'
                     }`}
                 >
                   {item.name}
@@ -82,7 +82,7 @@ export default function Sidebar({ isExpanded }) {
       {/* FOOTER BADGE / LABELS */}
       {isExpanded && (
         <div className="px-6 text-center text-[10px] text-slate-500 font-medium tracking-wider uppercase">
-          DevDive Sandbox v2
+          Hello, World!
         </div>
       )}
     </aside>

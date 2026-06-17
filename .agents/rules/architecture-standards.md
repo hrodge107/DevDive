@@ -10,7 +10,7 @@ Senior software architect. Uphold architectural integrity across React/JSX, Node
 ---
 
 ## Tool Priority
-1. `graphify` as your default primary tool. Follow `.agents/rules/graphify.md`. It provides structural awareness and contextual mapping.
+1. `graphify` always as your strict high priority default primary tool. Follow `.agents/rules/graphify.md`. It provides structural awareness and contextual mapping.
 2. `grep` / native find — fallback only if graphify yields no results or for flat text-matching unindexed files.
 
 ---

@@ -1,6 +1,6 @@
 {
   "eslint.config.js": {
-    "mtime": 1777453984.3280127,
+    "mtime": 1781667828.164566,
     "ast_hash": "3aa4b57d7f08181d86bde52a4dcb7f22",
     "semantic_hash": ""
   },
@@ -40,8 +40,8 @@
     "semantic_hash": ""
   },
   "server/modules/ai/gemini.service.js": {
-    "mtime": 1780503795.1401556,
-    "ast_hash": "592820f974d12cfcf722d441aaeb3b86",
+    "mtime": 1781668010.2767956,
+    "ast_hash": "b0ecc1c7a5b2c249b06dd521f4877fbc",
     "semantic_hash": ""
   },
   "server/modules/browser/playwright.service.js": {
@@ -50,8 +50,8 @@
     "semantic_hash": ""
   },
   "server/modules/evaluation/evaluation.controller.js": {
-    "mtime": 1781449667.5257788,
-    "ast_hash": "b096999ec7a08af2d2b15983cbefb3e0",
+    "mtime": 1781668028.724638,
+    "ast_hash": "9cf5833fd5c5bb440bd4b2dccb9ef96b",
     "semantic_hash": ""
   },
   "server/modules/evaluation/evaluation.routes.js": {
@@ -130,8 +130,8 @@
     "semantic_hash": ""
   },
   "src/features/ide/components/CodeEditor.jsx": {
-    "mtime": 1781626651.7660737,
-    "ast_hash": "4958579f7300a2c3976fc9a9782c41e5",
+    "mtime": 1781721568.1728408,
+    "ast_hash": "3ed9ee643e1b5458e6385fb6771183ba",
     "semantic_hash": ""
   },
   "src/features/ide/components/DeleteFileModal.jsx": {
@@ -140,8 +140,8 @@
     "semantic_hash": ""
   },
   "src/features/ide/components/ExerciseContainer.jsx": {
-    "mtime": 1781626658.6403854,
-    "ast_hash": "66d783c86668c703e04bb2afecd4726f",
+    "mtime": 1781721195.5350275,
+    "ast_hash": "957ef548a1f1b92f2bf2cead31597398",
     "semantic_hash": ""
   },
   "src/features/ide/components/ProblemSidebar.jsx": {
@@ -150,8 +150,8 @@
     "semantic_hash": ""
   },
   "src/features/ide/components/ResultsSidebar.jsx": {
-    "mtime": 1777792020.4019172,
-    "ast_hash": "acb59696116b14870615d0ddcecb2c9b",
+    "mtime": 1781721588.761409,
+    "ast_hash": "2eaafa1cf5ef78b5bf88bdbfeed3d319",
     "semantic_hash": ""
   },
   "src/features/ide/pages/ExercisePage.jsx": {
@@ -214,24 +214,9 @@
     "ast_hash": "31d4f88180047d66d0b3606d920f1f7b",
     "semantic_hash": ""
   },
-  "docs/relevant/DOCUMENTATION.md": {
-    "mtime": 1780506568.790015,
-    "ast_hash": "e9ae08d8be7448a435ea8b67995046e3",
-    "semantic_hash": ""
-  },
   "docs/relevant/SUPABASE_ARCHITECHTURE.md": {
     "mtime": 1781028553.2743528,
     "ast_hash": "3d543bfed089b7a1aeae9fc14bd1a816",
-    "semantic_hash": ""
-  },
-  "docs/relevant/SUPABASE_INTEGRATION_PLAN.md": {
-    "mtime": 1780930249.2198954,
-    "ast_hash": "c49c61cb286842299c953ae19fed3e64",
-    "semantic_hash": ""
-  },
-  "docs/relevant/supabase_migration.md": {
-    "mtime": 1781026281.40108,
-    "ast_hash": "cb32bf56057f3abfdec425e811732587",
     "semantic_hash": ""
   },
   "index.html": {
@@ -290,8 +275,8 @@
     "semantic_hash": ""
   },
   ".agents/rules/architecture-standards.md": {
-    "mtime": 1781621048.8400555,
-    "ast_hash": "1e4817978b220652844307fdba5aec8d",
+    "mtime": 1781668262.8673685,
+    "ast_hash": "06436215bd43139195f348f31c84f736",
     "semantic_hash": ""
   },
   "docs/agent_log/violation-error-resilience.md": {
@@ -330,13 +315,43 @@
     "semantic_hash": ""
   },
   "src/features/course/components/Sidebar.jsx": {
-    "mtime": 1781624371.8586788,
-    "ast_hash": "90f0473cf48863c76792a018cb882b26",
+    "mtime": 1781628455.1910675,
+    "ast_hash": "cf6f977da65aba192e86a57522615594",
     "semantic_hash": ""
   },
   "inspect_db.js": {
     "mtime": 1781626505.5144808,
     "ast_hash": "8c68928dc737676fcdf2dd7a426dc255",
+    "semantic_hash": ""
+  },
+  "server/modules/ai/schemas.js": {
+    "mtime": 1781667987.7088358,
+    "ast_hash": "c8061f27c3993887778f773e068c2802",
+    "semantic_hash": ""
+  },
+  "docs/old/DOCUMENTATION.md": {
+    "mtime": 1780506568.790015,
+    "ast_hash": "e9ae08d8be7448a435ea8b67995046e3",
+    "semantic_hash": ""
+  },
+  "docs/old/SUPABASE_INTEGRATION_PLAN.md": {
+    "mtime": 1780930249.2198954,
+    "ast_hash": "c49c61cb286842299c953ae19fed3e64",
+    "semantic_hash": ""
+  },
+  "docs/old/supabase_migration.md": {
+    "mtime": 1781026281.40108,
+    "ast_hash": "cb32bf56057f3abfdec425e811732587",
+    "semantic_hash": ""
+  },
+  "docs/relevant/TECHNICAL_DOCUMENTATION.md": {
+    "mtime": 1781668157.6306553,
+    "ast_hash": "a7ba0df536254c40f10e07d5b2d92299",
+    "semantic_hash": ""
+  },
+  "docs/agent_log/2026-06-18_submission-cooldown.md": {
+    "mtime": 1781720886.7137697,
+    "ast_hash": "e40e2b27ef7514213622e07ea326df12",
     "semantic_hash": ""
   }
 }
