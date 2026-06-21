@@ -102,7 +102,7 @@ export default function LessonPage() {
       <div className="min-h-screen bg-[#0B1326] text-slate-200 font-inter flex flex-col items-center justify-center">
         <Header />
         <div className="flex-1 flex items-center justify-center w-full">
-          <div className="animate-pulse flex flex-col items-center">
+          <div className="flex flex-col items-center">
             <div className="w-12 h-12 border-4 border-[#22D3EE] border-t-transparent rounded-full animate-spin mb-4"></div>
             <p className="text-[#22D3EE] font-mono tracking-widest text-sm uppercase">Loading Protocol...</p>
           </div>

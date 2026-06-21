@@ -42,7 +42,7 @@ export function ResultsSidebar({
         {isEvaluating ? (
           <div className="flex flex-col items-center justify-center h-full text-slate-400 space-y-4">
             <div className="w-10 h-10 border-4 border-slate-800 border-t-cyan-400 rounded-full animate-spin"></div>
-            <p className="font-semibold text-sm animate-pulse tracking-wide">Evaluating your code...</p>
+            <p className="font-semibold text-sm tracking-wide">Evaluating your code...</p>
           </div>
         ) : feedback ? (
           <>

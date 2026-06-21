@@ -80,8 +80,8 @@
     "semantic_hash": ""
   },
   "src/core/components/Header.jsx": {
-    "mtime": 1781626205.6486137,
-    "ast_hash": "254e157184ad0752afdd5d919bf68a5a",
+    "mtime": 1781755952.2566133,
+    "ast_hash": "a7068ffc2c17817e02a2faf7220c95e5",
     "semantic_hash": ""
   },
   "src/core/contexts/AuthContext.jsx": {
@@ -90,13 +90,13 @@
     "semantic_hash": ""
   },
   "src/features/auth/pages/LoginPage.jsx": {
-    "mtime": 1781027791.6054819,
-    "ast_hash": "8b078c4f92b5067f93e57cfb43019b0e",
+    "mtime": 1781755677.5237248,
+    "ast_hash": "284d3ca4e6dd256841cb88ce70c2c84f",
     "semantic_hash": ""
   },
   "src/features/auth/pages/SignupPage.jsx": {
-    "mtime": 1781030934.3321743,
-    "ast_hash": "25a334ea981ca23b8445750991df3d0c",
+    "mtime": 1781755681.5589628,
+    "ast_hash": "49d957df126792c48b3b01658441fbf0",
     "semantic_hash": ""
   },
   "src/features/course/components/CourseTimeline.jsx": {
@@ -115,13 +115,13 @@
     "semantic_hash": ""
   },
   "src/features/course/pages/CourseMap.jsx": {
-    "mtime": 1781626621.511179,
-    "ast_hash": "04f5616d8c1a975d7da1730c044e74c3",
+    "mtime": 1781755667.4892886,
+    "ast_hash": "de5656225bf9526488e9f0531c565913",
     "semantic_hash": ""
   },
   "src/features/course/pages/LessonPage.jsx": {
-    "mtime": 1781626636.2833397,
-    "ast_hash": "debde8669eacc328e1e93fb1f29e21aa",
+    "mtime": 1781722617.1801007,
+    "ast_hash": "ac82f6ad8557673b8665a61a4995bf59",
     "semantic_hash": ""
   },
   "src/features/ide/components/AddFileModal.jsx": {
@@ -150,8 +150,8 @@
     "semantic_hash": ""
   },
   "src/features/ide/components/ResultsSidebar.jsx": {
-    "mtime": 1781721588.761409,
-    "ast_hash": "2eaafa1cf5ef78b5bf88bdbfeed3d319",
+    "mtime": 1781722620.4363875,
+    "ast_hash": "ea50f2ec717c84f98185aab9c18fc884",
     "semantic_hash": ""
   },
   "src/features/ide/pages/ExercisePage.jsx": {
@@ -160,8 +160,8 @@
     "semantic_hash": ""
   },
   "src/features/landing/pages/LandingPage.jsx": {
-    "mtime": 1780504474.3858314,
-    "ast_hash": "d41b8408708e91f31699def9f0158db6",
+    "mtime": 1781755672.736808,
+    "ast_hash": "fa42ce8f0836c6015abb8e4759e1222b",
     "semantic_hash": ""
   },
   "src/lib/supabaseClient.js": {
@@ -300,8 +300,8 @@
     "semantic_hash": ""
   },
   "src/features/auth/pages/ProfilePage.jsx": {
-    "mtime": 1781452177.0452247,
-    "ast_hash": "64652d2af7a6257c500a9c2f421ea214",
+    "mtime": 1781755685.860199,
+    "ast_hash": "6c3ef02dddac7623a5d6a97c034534fa",
     "semantic_hash": ""
   },
   "src/features/ide/components/PlaygroundContainer.jsx": {

@@ -35,7 +35,7 @@ export default function LoginPage() {
     <div className="min-h-screen bg-[#0B1326] text-white font-inter flex flex-col selection:bg-[#22D3EE]/30">
       <Header />
       <main className="flex-1 flex flex-col items-center justify-center p-4 relative">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[#22D3EE]/10 rounded-full blur-[100px] pointer-events-none" />
+
         
         <div className="w-full max-w-md bg-[#131A2B] rounded-2xl border border-white/10 p-8 relative z-10 shadow-2xl">
           <h2 className="text-3xl font-bold mb-2 text-center text-white">Welcome Back</h2>

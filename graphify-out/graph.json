@@ -1247,7 +1247,7 @@
       "label": "EvaluationSection()",
       "file_type": "code",
       "source_file": "src/features/ide/components/ResultsSidebar.jsx",
-      "source_location": "L249",
+      "source_location": "L246",
       "_origin": "ast",
       "id": "components_resultssidebar_evaluationsection",
       "community": 6,
@@ -6837,9 +6837,9 @@
       "source_file": "docs/agent_log/2026-06-18_submission-cooldown.md",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "agent_log_2026_06_18_submission_cooldown",
-      "target": "agent_log_2026_06_18_submission_cooldown_violation_001_timer_logic_coupled_to_ui_container",
-      "confidence_score": 1.0
+      "target": "agent_log_2026_06_18_submission_cooldown_violation_001_timer_logic_coupled_to_ui_container"
     },
     {
       "relation": "contains",
@@ -9033,5 +9033,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "2b624e2ce64096f00464640501a4cf856200a22f"
+  "built_at_commit": "e0ecbf06240fa130552dc43524bd5b0c9f21d3a9"
 }

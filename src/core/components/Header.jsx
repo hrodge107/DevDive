@@ -7,7 +7,7 @@ export default function Header({ showSidebarToggle = false, onToggleSidebar }) {
   const { user } = useAuth();
 
   return (
-    <header className="relative flex items-center justify-between py-4 px-8 border-b border-white/5 bg-transparent w-full z-50 overflow-hidden">
+    <header className="relative flex items-center justify-between py-4 px-8 border-b border-white/5 bg-[#0B1326] w-full z-50 overflow-hidden">
       {/* SVG Wave Background Overlay */}
       <div className="absolute top-0 left-0 h-full w-[280px] sm:w-[360px] md:w-[440px] -z-10 pointer-events-none select-none">
         <svg

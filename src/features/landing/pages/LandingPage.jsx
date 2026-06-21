@@ -107,9 +107,7 @@ export default function LandingPage() {
         {/* CTA Section */}
         <section className="py-24 px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto bg-[#0F172A] border border-[#1E293B] rounded-2xl p-12 text-center shadow-2xl relative overflow-hidden">
-            {/* Glow effect */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-[#22D3EE]/5 rounded-full blur-[80px]" />
-            <div className="absolute bottom-0 left-0 w-64 h-64 bg-indigo-500/5 rounded-full blur-[80px]" />
+
 
             <h2 className="text-2xl md:text-3xl font-bold mb-4 font-serif relative z-10">
               Ready to improve your Web Development skills?
