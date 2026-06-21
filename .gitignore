@@ -28,3 +28,6 @@ dist-ssr
 
 .agents/
 .graphify-out/
+supabase/
+docs/
+graphify-out/
