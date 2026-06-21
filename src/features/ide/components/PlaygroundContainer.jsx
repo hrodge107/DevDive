@@ -179,7 +179,7 @@ export function PlaygroundContainer() {
   };
 
   return (
-    <div className="flex h-[calc(100vh-64px)] w-full bg-gray-950 text-gray-200 overflow-hidden relative">
+    <div className="flex flex-1 w-full bg-gray-950 text-gray-200 overflow-hidden relative">
       <CodeEditor
         files={files}
         activeFileName={activeFileName}

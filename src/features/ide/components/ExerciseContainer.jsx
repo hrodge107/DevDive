@@ -12,8 +12,9 @@ import { useAuth } from '../../../core/contexts/AuthContext';
 import { fetchExerciseConfig } from '../../../services/courseService';
 import { evaluateCode as evaluateCodeService } from '../../../services/evaluationService';
 
-export function ExerciseContainer() {
+export function ExerciseContainer({ groupExercise, onGroupSubmit }) {
   const { exerciseId } = useParams();
+  const currentId = groupExercise ? groupExercise.id : exerciseId;
   const { user } = useAuth();
 
   // --- STATE ---
@@ -70,19 +71,29 @@ export function ExerciseContainer() {
     const loadExercise = async () => {
       setIsLoading(true);
       try {
-        const exercise = await fetchExerciseConfig(exerciseId);
-
-        const config = {
-          title: exercise.lessons?.title || 'Exercise',
-          unitId: exercise.lessons?.unit_id,
-          description: exercise.task_description,
-          initialFiles: exercise.starter_files
-        };
+        let config;
+        
+        if (groupExercise) {
+          config = {
+            title: groupExercise.title || 'Group Task',
+            unitId: null,
+            description: groupExercise.task_description,
+            initialFiles: groupExercise.starter_files
+          };
+        } else {
+          const exercise = await fetchExerciseConfig(exerciseId);
+          config = {
+            title: exercise.lessons?.title || 'Exercise',
+            unitId: exercise.lessons?.unit_id,
+            description: exercise.task_description,
+            initialFiles: exercise.starter_files
+          };
+        }
 
         setExerciseConfig(config);
 
         // Hydrate from localStorage if exists, otherwise use initialFiles
-        const cachedStr = localStorage.getItem(`devdive_saved_code_${exerciseId}`);
+        const cachedStr = localStorage.getItem(`devdive_saved_code_${currentId}`);
         let initialData = config.initialFiles;
 
         if (cachedStr) {
@@ -108,7 +119,7 @@ export function ExerciseContainer() {
     };
 
     loadExercise();
-  }, [exerciseId]);
+  }, [exerciseId, groupExercise, currentId]);
 
   // Sidebar resize
   useEffect(() => {
@@ -145,7 +156,7 @@ export function ExerciseContainer() {
     );
     setFiles(updatedFiles);
     // Trigger debounced save
-    debouncedSaveToLocalStorage(updatedFiles, exerciseId);
+    debouncedSaveToLocalStorage(updatedFiles, currentId);
   };
 
   const handleAddFile = (finalFileName, fileType) => {
@@ -158,7 +169,7 @@ export function ExerciseContainer() {
     setFiles(updatedFiles);
     setActiveFileName(finalFileName);
     setIsAddModalOpen(false);
-    debouncedSaveToLocalStorage(updatedFiles, exerciseId);
+    debouncedSaveToLocalStorage(updatedFiles, currentId);
   };
 
   const handleDeleteClick = (fileName) => {
@@ -173,7 +184,7 @@ export function ExerciseContainer() {
       if (activeFileName === fileToDelete) {
         setActiveFileName(updatedFiles[0].name);
       }
-      debouncedSaveToLocalStorage(updatedFiles, exerciseId);
+      debouncedSaveToLocalStorage(updatedFiles, currentId);
     }
     setIsDeleteModalOpen(false);
     setFileToDelete(null);
@@ -200,7 +211,15 @@ export function ExerciseContainer() {
       // Inject CSS
       htmlContent = injectCSS(htmlContent, files);
 
-      const data = await evaluateCodeService(user?.id, exerciseConfig?.unitId, exerciseId, htmlContent);
+      let data;
+      if (groupExercise && onGroupSubmit) {
+        const payloadHtml = files.find(f => f.language === 'html')?.content || '';
+        const payloadCss = files.find(f => f.language === 'css')?.content || '';
+        const payloadJs = files.find(f => f.language === 'javascript' || f.language === 'js')?.content || '';
+        data = await onGroupSubmit({ html: payloadHtml, css: payloadCss, js: payloadJs });
+      } else {
+        data = await evaluateCodeService(user?.id, exerciseConfig?.unitId, exerciseId, htmlContent);
+      }
 
       setFeedback(data);
     } catch (error) {
@@ -229,7 +248,7 @@ export function ExerciseContainer() {
 
   if (isLoading) {
     return (
-      <div className="flex h-[calc(100vh-64px)] w-full items-center justify-center bg-gray-950 text-white">
+      <div className="flex flex-1 w-full items-center justify-center bg-gray-950 text-white">
         <div className="flex flex-col items-center gap-4">
           <div className="w-12 h-12 border-4 border-gray-800 border-t-blue-500 rounded-full animate-spin"></div>
           <p className="text-gray-400 font-medium">Loading exercise...</p>
@@ -245,7 +264,7 @@ export function ExerciseContainer() {
   const visualScore = feedback?.visualEvaluation?.filter(e => e.passed).length * visualPointsPerReq || 0;
 
   return (
-    <div className="flex h-[calc(100vh-64px)] w-full bg-gray-950 text-gray-200 overflow-hidden relative">
+    <div className="flex flex-1 w-full bg-gray-950 text-gray-200 overflow-hidden relative">
       <ProblemSidebar
         exerciseConfig={exerciseConfig}
         isSidebarOpen={isSidebarOpen}
@@ -324,13 +343,13 @@ export function ExerciseContainer() {
 
             <div className="flex flex-col gap-3 pt-2">
               <a
-                href={`/login?redirect=/exercise/${exerciseId}`}
+                href={`/login?redirect=${groupExercise ? `/groups/${groupExercise.group_id}/exercise/${currentId}` : `/exercise/${exerciseId}`}`}
                 className="w-full py-3 bg-[#22D3EE] hover:bg-cyan-300 text-slate-900 rounded-lg transition-all shadow-lg shadow-cyan-500/20 text-sm font-bold flex items-center justify-center"
               >
                 Sign In
               </a>
               <a
-                href={`/signup?redirect=/exercise/${exerciseId}`}
+                href={`/signup?redirect=${groupExercise ? `/groups/${groupExercise.group_id}/exercise/${currentId}` : `/exercise/${exerciseId}`}`}
                 className="w-full py-3 border border-gray-700 hover:border-gray-600 hover:bg-gray-800/50 text-gray-300 hover:text-white rounded-lg transition-colors text-sm font-semibold flex items-center justify-center"
               >
                 Create Account

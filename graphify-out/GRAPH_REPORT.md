@@ -1,16 +1,16 @@
-# Graph Report - devdive  (2026-06-18)
+# Graph Report - devdive  (2026-06-21)
 
 ## Corpus Check
-- 63 files · ~35,388 words
+- 80 files · ~47,337 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 395 nodes · 492 edges · 35 communities (31 shown, 4 thin omitted)
+- 455 nodes · 701 edges · 33 communities (30 shown, 3 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `e0ecbf06`
+- Built from commit: `dcb664e2`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -38,8 +38,6 @@
 - [[_COMMUNITY_Community 20|Community 20]]
 - [[_COMMUNITY_Community 21|Community 21]]
 - [[_COMMUNITY_Community 23|Community 23]]
-- [[_COMMUNITY_Community 24|Community 24]]
-- [[_COMMUNITY_Community 28|Community 28]]
 - [[_COMMUNITY_Community 29|Community 29]]
 - [[_COMMUNITY_Community 30|Community 30]]
 - [[_COMMUNITY_Community 31|Community 31]]
@@ -48,65 +46,65 @@
 - [[_COMMUNITY_Community 34|Community 34]]
 
 ## God Nodes (most connected - your core abstractions)
-1. `useAuth()` - 15 edges
-2. `2. Core Modules & Component Specifications` - 13 edges
-3. `Header()` - 9 edges
-4. `supabase` - 9 edges
-5. `Module: Application Entry & Routing` - 9 edges
-6. `Module: Core UI Components` - 9 edges
-7. `Module: Landing Feature` - 9 edges
-8. `Module: Course Feature` - 9 edges
-9. `Module: IDE Feature` - 9 edges
-10. `Module: Frontend Utilities` - 9 edges
+1. `useAuth()` - 25 edges
+2. `getAuthHeaders()` - 18 edges
+3. `handleResponse()` - 18 edges
+4. `Header()` - 15 edges
+5. `2. Core Modules & Component Specifications` - 13 edges
+6. `supabase` - 10 edges
+7. `Module: Application Entry & Routing` - 9 edges
+8. `Module: Core UI Components` - 9 edges
+9. `Module: Landing Feature` - 9 edges
+10. `Module: Course Feature` - 9 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `captureScreenshots()` --calls--> `normalizeCaptureScreens()`  [EXTRACTED]
   server/modules/browser/playwright.service.js → server/utils/helpers.js
+- `authMiddleware()` --calls--> `createUserClient()`  [EXTRACTED]
+  server/middleware/authMiddleware.js → server/lib/supabaseUserClient.js
 - `checkEvaluation()` --calls--> `evaluateSubmission()`  [EXTRACTED]
   server/modules/evaluation/evaluation.controller.js → server/modules/ai/gemini.service.js
+- `submitExercise()` --calls--> `evaluateSubmission()`  [EXTRACTED]
+  server/modules/groups/groups.controller.js → server/modules/ai/gemini.service.js
 - `checkEvaluation()` --calls--> `enqueueScreenshot()`  [EXTRACTED]
   server/modules/evaluation/evaluation.controller.js → server/modules/browser/playwright.service.js
-- `checkEvaluation()` --calls--> `assembleDocument()`  [EXTRACTED]
-  server/modules/evaluation/evaluation.controller.js → server/utils/helpers.js
-- `checkEvaluation()` --calls--> `normalizeCaptureScreens()`  [EXTRACTED]
-  server/modules/evaluation/evaluation.controller.js → server/utils/helpers.js
 
 ## Import Cycles
 - None detected.
 
-## Communities (35 total, 4 thin omitted)
+## Communities (33 total, 3 thin omitted)
 
 ### Community 0 - "Community 0"
-Cohesion: 0.13
-Nodes (23): CodeEditor(), ExerciseContainer(), Footer(), Header(), QuizEngine(), Sidebar(), AuthContext, AuthProvider() (+15 more)
+Cohesion: 0.10
+Nodes (32): CodeEditor(), ExerciseContainer(), Footer(), Header(), ProblemSidebar(), QuizEngine(), ResultsSidebar(), Sidebar() (+24 more)
 
 ### Community 1 - "Community 1"
-Cohesion: 0.12
-Nodes (16): devDependencies, autoprefixer, concurrently, eslint, @eslint/js, eslint-plugin-react-hooks, eslint-plugin-react-refresh, globals (+8 more)
+Cohesion: 0.07
+Nodes (26): devDependencies, autoprefixer, concurrently, eslint, @eslint/js, eslint-plugin-react-hooks, eslint-plugin-react-refresh, globals (+18 more)
 
 ### Community 2 - "Community 2"
-Cohesion: 0.13
-Nodes (15): evaluateSubmission(), getGenAI(), evaluationResponseSchema, BrowserQueue, captureScreenshots(), enqueueScreenshot(), checkEvaluation(), healthCheck() (+7 more)
+Cohesion: 0.08
+Nodes (36): evaluateSubmission(), getGenAI(), evaluationResponseSchema, BrowserQueue, captureScreenshots(), enqueueScreenshot(), checkEvaluation(), healthCheck() (+28 more)
 
 ### Community 3 - "Community 3"
 Cohesion: 0.06
 Nodes (35): 1. System Overview & Architecture, 2. Core Modules & Component Specifications, 3. Data Flow & Sequencing, 4. Interface & API Specifications, 5. Algorithmic Edge Cases & Operational Behavior, Class: `BrowserQueue`, Code Execution & Evaluation Sequence, Component: `App` (+27 more)
 
 ### Community 4 - "Community 4"
-Cohesion: 0.07
-Nodes (29): Code Example, Code Example, Code Example, Cross-References, Cross-References, Cross-References, Dependencies, Dependencies (+21 more)
+Cohesion: 0.22
+Nodes (9): Code Example, Cross-References, Dependencies, Known Limitations / Edge Cases, Location, Module: Application Entry & Routing, Public API / Exports, Purpose (+1 more)
 
 ### Community 5 - "Community 5"
 Cohesion: 0.11
 Nodes (18): 1. Current Implementation Report, 2. Technical Documentation, 3. Hosting Feasibility & Resource Analysis, 4. Open Architecture Risks, API Route Map, Core Workflows, Database Schema, DevDive Technical Audit & Architecture Report (+10 more)
 
 ### Community 6 - "Community 6"
-Cohesion: 0.16
-Nodes (12): AddFileModal(), EXTENSION_MAP, DeleteFileModal(), DEFAULT_FILES, PlaygroundContainer(), ProblemSidebar(), ResultsSidebar(), fetchExerciseConfig() (+4 more)
+Cohesion: 0.24
+Nodes (8): AddFileModal(), EXTENSION_MAP, DeleteFileModal(), DEFAULT_FILES, PlaygroundContainer(), buildPreviewHtml(), injectCSS(), injectJS()
 
 ### Community 7 - "Community 7"
-Cohesion: 0.07
-Nodes (26): dependencies, cors, dotenv, express, express-rate-limit, @google/generative-ai, lodash.debounce, @monaco-editor/react (+18 more)
+Cohesion: 0.12
+Nodes (16): dependencies, cors, dotenv, express, express-rate-limit, @google/generative-ai, lodash.debounce, @monaco-editor/react (+8 more)
 
 ### Community 8 - "Community 8"
 Cohesion: 0.24
@@ -121,24 +119,24 @@ Cohesion: 0.10
 Nodes (20): 1. Core Identity Architecture, 1. File Structure Restructured, 2. Stateless Content Maps, 2. The Progress Ledger (`public.user_progress`), 3. Security (RLS Policies), 3. Supabase Authentication, 4. Dynamic Curriculum, 5. Backend Ledger Automation (+12 more)
 
 ### Community 11 - "Community 11"
-Cohesion: 0.22
-Nodes (9): Code Example, Cross-References, Dependencies, Known Limitations / Edge Cases, Location, Module: Application Entry & Routing, Public API / Exports, Purpose (+1 more)
+Cohesion: 0.14
+Nodes (27): CreateGroupModal(), JoinGroupModal(), MembersTab(), MemberTasksView(), RemoveMemberModal(), ReportDashboard(), StudentStatusModal(), TasksTab() (+19 more)
 
 ### Community 12 - "Community 12"
-Cohesion: 0.22
-Nodes (9): Code Example, Cross-References, Dependencies, Known Limitations / Edge Cases, Location, Module: Landing Feature, Public API / Exports, Purpose (+1 more)
+Cohesion: 0.05
+Nodes (38): Code Example, Code Example, Code Example, Code Example, Cross-References, Cross-References, Cross-References, Cross-References (+30 more)
 
 ### Community 13 - "Community 13"
 Cohesion: 0.22
-Nodes (9): Code Example, Cross-References, Dependencies, Known Limitations / Edge Cases, Location, Module: Core UI Components, Public API / Exports, Purpose (+1 more)
+Nodes (9): Code Example, Cross-References, Dependencies, Known Limitations / Edge Cases, Location, Module: AI Evaluation Service, Public API / Exports, Purpose (+1 more)
 
 ### Community 14 - "Community 14"
 Cohesion: 0.22
-Nodes (9): Code Example, Cross-References, Dependencies, Known Limitations / Edge Cases, Location, Module: IDE Feature, Public API / Exports, Purpose (+1 more)
+Nodes (9): Code Example, Cross-References, Dependencies, Known Limitations / Edge Cases, Location, Module: Course Feature, Public API / Exports, Purpose (+1 more)
 
 ### Community 15 - "Community 15"
 Cohesion: 0.22
-Nodes (9): Code Example, Cross-References, Dependencies, Known Limitations / Edge Cases, Location, Module: Frontend Utilities, Public API / Exports, Purpose (+1 more)
+Nodes (9): Code Example, Cross-References, Dependencies, Known Limitations / Edge Cases, Location, Module: Core UI Components, Public API / Exports, Purpose (+1 more)
 
 ### Community 16 - "Community 16"
 Cohesion: 0.22
@@ -150,7 +148,7 @@ Nodes (9): Code Example, Cross-References, Dependencies, Known Limitations / Edg
 
 ### Community 18 - "Community 18"
 Cohesion: 0.22
-Nodes (9): Code Example, Cross-References, Dependencies, Known Limitations / Edge Cases, Location, Module: AI Evaluation Service, Public API / Exports, Purpose (+1 more)
+Nodes (9): Code Example, Cross-References, Dependencies, Known Limitations / Edge Cases, Location, Module: Data Layer, Public API / Exports, Purpose (+1 more)
 
 ### Community 20 - "Community 20"
 Cohesion: 0.29
@@ -158,11 +156,7 @@ Nodes (6): 1. Identity Layer, 2. Content Layer (The Curriculum), 3. The State La
 
 ### Community 21 - "Community 21"
 Cohesion: 0.22
-Nodes (9): Code Example, Cross-References, Dependencies, Known Limitations / Edge Cases, Location, Module: Evaluation API, Public API / Exports, Purpose (+1 more)
-
-### Community 28 - "Community 28"
-Cohesion: 0.22
-Nodes (8): Architecture Standards, Behavior, Log Footer, Logging Protocol, Principles, Role, Tool Priority, Violation Schema
+Nodes (9): Code Example, Cross-References, Dependencies, Known Limitations / Edge Cases, Location, Module: Browser Capture Service, Public API / Exports, Purpose (+1 more)
 
 ### Community 29 - "Community 29"
 Cohesion: 0.40
@@ -185,24 +179,24 @@ Cohesion: 0.29
 Nodes (6): Backend Changes, Frontend Changes, Step 1: Schema SQL, Step 2: Seeding SQL (Data Extraction), Step 3: Codebase Integration Plan, Supabase Curriculum Migration Plan & SQL Scripts
 
 ## Knowledge Gaps
-- **225 isolated node(s):** `supabase`, `name`, `private`, `version`, `type` (+220 more)
+- **218 isolated node(s):** `supabase`, `name`, `private`, `version`, `type` (+213 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **4 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **3 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `Module: Application Entry & Routing` connect `Community 11` to `Community 4`?**
-  _High betweenness centrality (0.011) - this node is a cross-community bridge._
-- **Why does `Module: Core UI Components` connect `Community 13` to `Community 4`?**
-  _High betweenness centrality (0.011) - this node is a cross-community bridge._
-- **Why does `Module: Landing Feature` connect `Community 12` to `Community 4`?**
-  _High betweenness centrality (0.011) - this node is a cross-community bridge._
+- **Why does `useAuth()` connect `Community 0` to `Community 11`?**
+  _High betweenness centrality (0.010) - this node is a cross-community bridge._
+- **Why does `Module: Application Entry & Routing` connect `Community 4` to `Community 12`?**
+  _High betweenness centrality (0.008) - this node is a cross-community bridge._
+- **Why does `Module: Core UI Components` connect `Community 15` to `Community 12`?**
+  _High betweenness centrality (0.008) - this node is a cross-community bridge._
 - **What connects `supabase`, `name`, `private` to the rest of the system?**
-  _225 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _218 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 0` be split into smaller, more focused modules?**
-  _Cohesion score 0.12624584717607973 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.09562841530054644 - nodes in this community are weakly interconnected._
 - **Should `Community 1` be split into smaller, more focused modules?**
-  _Cohesion score 0.125 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.07407407407407407 - nodes in this community are weakly interconnected._
 - **Should `Community 2` be split into smaller, more focused modules?**
-  _Cohesion score 0.13230769230769232 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.08235294117647059 - nodes in this community are weakly interconnected._

@@ -100,7 +100,7 @@ export default function LessonPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-[#0B1326] text-slate-200 font-inter flex flex-col items-center justify-center">
-        <Header />
+        <Header showBackButton />
         <div className="flex-1 flex items-center justify-center w-full">
           <div className="flex flex-col items-center">
             <div className="w-12 h-12 border-4 border-[#22D3EE] border-t-transparent rounded-full animate-spin mb-4"></div>
@@ -114,7 +114,7 @@ export default function LessonPage() {
   if (error || !lessonData) {
     return (
       <div className="min-h-screen bg-[#0B1326] text-slate-200 font-inter flex flex-col items-center justify-center">
-        <Header />
+        <Header showBackButton />
         <div className="flex-1 flex items-center justify-center w-full">
           <div className="text-red-400 font-mono text-center">
             <p className="text-xl mb-2">System Error</p>
@@ -130,7 +130,7 @@ export default function LessonPage() {
 
   return (
     <div className="min-h-screen bg-[#0B1326] text-slate-200 font-inter flex flex-col overflow-x-hidden selection:bg-[#22D3EE]/30 pb-24">
-      <Header />
+      <Header showBackButton />
 
       <main className="flex-1 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full">
         {/* Breadcrumb */}

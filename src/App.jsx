@@ -9,6 +9,13 @@ import LoginPage from './features/auth/pages/LoginPage';
 import SignupPage from './features/auth/pages/SignupPage';
 import ProfilePage from './features/auth/pages/ProfilePage';
 
+// Groups Feature
+import GroupsPage from './features/groups/pages/GroupsPage';
+import RoomPage from './features/groups/pages/RoomPage';
+import CreateTaskPage from './features/groups/pages/CreateTaskPage';
+import EditTaskPage from './features/groups/pages/EditTaskPage';
+import GroupExercisePage from './features/groups/pages/GroupExercisePage';
+
 function App() {
   return (
     <AuthProvider>
@@ -22,6 +29,13 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/profile" element={<ProfilePage />} />
+          
+          {/* Groups Routes */}
+          <Route path="/groups" element={<GroupsPage />} />
+          <Route path="/groups/:groupId" element={<RoomPage />} />
+          <Route path="/groups/:groupId/create-task" element={<CreateTaskPage />} />
+          <Route path="/groups/:groupId/edit-task/:exId" element={<EditTaskPage />} />
+          <Route path="/groups/:groupId/exercise/:exId" element={<GroupExercisePage />} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>

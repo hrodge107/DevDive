@@ -30,8 +30,8 @@
     "semantic_hash": ""
   },
   "server/index.js": {
-    "mtime": 1780504497.3362062,
-    "ast_hash": "cda14335fcda2ee5bda8594c3b1f5559",
+    "mtime": 1782049870.380046,
+    "ast_hash": "9ee9057f065b347ece2cab7257b73755",
     "semantic_hash": ""
   },
   "server/lib/supabase.js": {
@@ -65,8 +65,8 @@
     "semantic_hash": ""
   },
   "src/App.jsx": {
-    "mtime": 1781621560.143027,
-    "ast_hash": "44a3e92691576e15c00cd320ffa9bab2",
+    "mtime": 1782050431.8530607,
+    "ast_hash": "eb84eba1ee755cae2110d92c1933e2c2",
     "semantic_hash": ""
   },
   "src/components/QuizEngine.jsx": {
@@ -80,8 +80,8 @@
     "semantic_hash": ""
   },
   "src/core/components/Header.jsx": {
-    "mtime": 1781755952.2566133,
-    "ast_hash": "a7068ffc2c17817e02a2faf7220c95e5",
+    "mtime": 1782052318.0156064,
+    "ast_hash": "58b5864284a7e7dfc5233fd92dad0bef",
     "semantic_hash": ""
   },
   "src/core/contexts/AuthContext.jsx": {
@@ -120,8 +120,8 @@
     "semantic_hash": ""
   },
   "src/features/course/pages/LessonPage.jsx": {
-    "mtime": 1781722617.1801007,
-    "ast_hash": "ac82f6ad8557673b8665a61a4995bf59",
+    "mtime": 1782052335.8672252,
+    "ast_hash": "2973ed93f4f9d775eb4553fdc0b72e1b",
     "semantic_hash": ""
   },
   "src/features/ide/components/AddFileModal.jsx": {
@@ -140,8 +140,8 @@
     "semantic_hash": ""
   },
   "src/features/ide/components/ExerciseContainer.jsx": {
-    "mtime": 1781721195.5350275,
-    "ast_hash": "957ef548a1f1b92f2bf2cead31597398",
+    "mtime": 1782052040.2990346,
+    "ast_hash": "d8f3ba95933b19f062ae90773f1fff94",
     "semantic_hash": ""
   },
   "src/features/ide/components/ProblemSidebar.jsx": {
@@ -155,8 +155,8 @@
     "semantic_hash": ""
   },
   "src/features/ide/pages/ExercisePage.jsx": {
-    "mtime": 1780504480.652431,
-    "ast_hash": "3ff8551f6a79fe6cf8f119cf5bfb3d39",
+    "mtime": 1782052300.8581343,
+    "ast_hash": "ec27e4b72b8653c1ba4cb92e98920eec",
     "semantic_hash": ""
   },
   "src/features/landing/pages/LandingPage.jsx": {
@@ -305,23 +305,23 @@
     "semantic_hash": ""
   },
   "src/features/ide/components/PlaygroundContainer.jsx": {
-    "mtime": 1781622598.7053504,
-    "ast_hash": "f84eeff6d2c04316c3c8d8a2c7ae763d",
+    "mtime": 1782052026.684869,
+    "ast_hash": "2197c2330fd2ca26526dddc809d4c70b",
     "semantic_hash": ""
   },
   "src/features/ide/pages/PlaygroundPage.jsx": {
-    "mtime": 1781623373.2420466,
-    "ast_hash": "f9723d4940df4990787415e4e5ad1e00",
+    "mtime": 1782052326.9585338,
+    "ast_hash": "5e8fba0cd8c98693857c8ccaef331a8e",
     "semantic_hash": ""
   },
   "src/features/course/components/Sidebar.jsx": {
-    "mtime": 1781628455.1910675,
-    "ast_hash": "cf6f977da65aba192e86a57522615594",
+    "mtime": 1782050403.0315511,
+    "ast_hash": "4097445389489af2894e94e411d3fc47",
     "semantic_hash": ""
   },
   "inspect_db.js": {
-    "mtime": 1781626505.5144808,
-    "ast_hash": "8c68928dc737676fcdf2dd7a426dc255",
+    "mtime": 1782051738.222405,
+    "ast_hash": "08a8c140e0fcb968c4d078837443690e",
     "semantic_hash": ""
   },
   "server/modules/ai/schemas.js": {
@@ -352,6 +352,106 @@
   "docs/agent_log/2026-06-18_submission-cooldown.md": {
     "mtime": 1781720886.7137697,
     "ast_hash": "e40e2b27ef7514213622e07ea326df12",
+    "semantic_hash": ""
+  },
+  "server/lib/supabaseUserClient.js": {
+    "mtime": 1782049738.1624758,
+    "ast_hash": "6926ca8bdf5b56b9abf4e0115f763efd",
+    "semantic_hash": ""
+  },
+  "server/middleware/authMiddleware.js": {
+    "mtime": 1782049750.7894921,
+    "ast_hash": "12157dfc5a97cf87976c377ca9a51be3",
+    "semantic_hash": ""
+  },
+  "server/modules/groups/groups.controller.js": {
+    "mtime": 1782049848.2984068,
+    "ast_hash": "abadfbbc5820b9a3d547c3f1461a5bd0",
+    "semantic_hash": ""
+  },
+  "server/modules/groups/groups.routes.js": {
+    "mtime": 1782049860.9360917,
+    "ast_hash": "2a643f61a1cc1bfad452410b1587e7f7",
+    "semantic_hash": ""
+  },
+  "src/features/groups/components/CreateGroupModal.jsx": {
+    "mtime": 1782049974.0196824,
+    "ast_hash": "f4092d7ccc2ce50272774a7ef6fd6ff3",
+    "semantic_hash": ""
+  },
+  "src/features/groups/components/JoinGroupModal.jsx": {
+    "mtime": 1782049995.0821364,
+    "ast_hash": "0dd6df1617bb8b26cec45c3f8a26e711",
+    "semantic_hash": ""
+  },
+  "src/features/groups/components/MemberTasksView.jsx": {
+    "mtime": 1782050337.4168658,
+    "ast_hash": "1b2b950dcc90123a58a01bdf2a5ae0a5",
+    "semantic_hash": ""
+  },
+  "src/features/groups/components/MembersTab.jsx": {
+    "mtime": 1782052810.7972953,
+    "ast_hash": "7dbc7a215d0bcc301dc21bad569be980",
+    "semantic_hash": ""
+  },
+  "src/features/groups/components/ReportDashboard.jsx": {
+    "mtime": 1782050200.6852071,
+    "ast_hash": "72cc2f33e9d20bad53e353620bffd2ee",
+    "semantic_hash": ""
+  },
+  "src/features/groups/components/StudentStatusModal.jsx": {
+    "mtime": 1782050221.3466153,
+    "ast_hash": "68bc4fa5d1840b1b5c1952756b9a77a3",
+    "semantic_hash": ""
+  },
+  "src/features/groups/components/TasksTab.jsx": {
+    "mtime": 1782050081.1226394,
+    "ast_hash": "602e253724df5c4b980f98c98e3228a3",
+    "semantic_hash": ""
+  },
+  "src/features/groups/pages/CreateTaskPage.jsx": {
+    "mtime": 1782050126.3785927,
+    "ast_hash": "5ea207d13545a9e12a64ab62296bf0d3",
+    "semantic_hash": ""
+  },
+  "src/features/groups/pages/EditTaskPage.jsx": {
+    "mtime": 1782050173.452049,
+    "ast_hash": "6442103c2de4d89641d87ffc5d4d73e1",
+    "semantic_hash": ""
+  },
+  "src/features/groups/pages/GroupExercisePage.jsx": {
+    "mtime": 1782052296.033836,
+    "ast_hash": "522f9e2c4bc0cfb051c99de64a193b88",
+    "semantic_hash": ""
+  },
+  "src/features/groups/pages/GroupsPage.jsx": {
+    "mtime": 1782049945.6168396,
+    "ast_hash": "05806da09f3d74d5d47cdb2b1aae4631",
+    "semantic_hash": ""
+  },
+  "src/features/groups/pages/RoomPage.jsx": {
+    "mtime": 1782052814.726187,
+    "ast_hash": "3f8b3ced512aafb64bd44e62706ea65f",
+    "semantic_hash": ""
+  },
+  "src/services/groupService.js": {
+    "mtime": 1782049905.581007,
+    "ast_hash": "4cfeba0c79594eeeff7923770c330bdb",
+    "semantic_hash": ""
+  },
+  "supabase/migrations/20260621212350_add_groups_feature.sql": {
+    "mtime": 1782051745.3825257,
+    "ast_hash": "2b7315b25a0007dd3d3a9ecec5384cdf",
+    "semantic_hash": ""
+  },
+  "docs/agent_log/2026-06-21_fix-groups-rls.md": {
+    "mtime": 1782051764.503898,
+    "ast_hash": "240300a10c6abd4170ae0ddd9a9056e1",
+    "semantic_hash": ""
+  },
+  "src/features/groups/components/RemoveMemberModal.jsx": {
+    "mtime": 1782052803.1024683,
+    "ast_hash": "7b0df33e6b07a8585d64dbab20487667",
     "semantic_hash": ""
   }
 }

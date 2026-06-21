@@ -1,10 +1,11 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 
-export default function Header({ showSidebarToggle = false, onToggleSidebar }) {
+export default function Header({ showSidebarToggle = false, onToggleSidebar, showBackButton = false, children }) {
   const location = useLocation();
   const currentPath = location.pathname;
   const { user } = useAuth();
+  const navigate = useNavigate();
 
   return (
     <header className="relative flex items-center justify-between py-4 px-8 border-b border-white/5 bg-[#0B1326] w-full z-50 overflow-hidden">
@@ -56,6 +57,23 @@ export default function Header({ showSidebarToggle = false, onToggleSidebar }) {
       </div>
 
       <div className="flex items-center gap-4 relative z-10">
+        {showBackButton && (
+          <button
+            onClick={() => navigate(-1)}
+            className="p-1.5 -ml-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800/60 active:bg-slate-900 transition-all focus:outline-none flex items-center justify-center mr-1"
+            title="Go Back"
+          >
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+        )}
         {showSidebarToggle && (
           <button
             onClick={onToggleSidebar}
@@ -74,10 +92,11 @@ export default function Header({ showSidebarToggle = false, onToggleSidebar }) {
           </button>
         )}
 
-        <div className="flex items-center">
+        <div className="flex items-center gap-2">
           <Link to="/" className="text-2xl font-black tracking-tighter text-[#22D3EE] hover:opacity-90 transition-opacity">
             DevDive
           </Link>
+          {children}
         </div>
       </div>
 
